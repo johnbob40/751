@@ -12,6 +12,13 @@ public class Data {
 		}
 		return data;
 	}
+	public static Collection<Integer> generateConstant(int length, int number){
+		Collection<Integer> data = new ArrayList<Integer>();
+		for (int i = 0; i < length; i++){
+			data.add(number);
+		}
+		return data;
+	}
 	
 	public static Collection<Integer> sort(Collection<Integer> data){
 		return null;

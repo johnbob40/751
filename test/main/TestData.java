@@ -15,4 +15,14 @@ public class TestData {
 		Collection<Integer> data = Data.generate(length);
 		assertEquals(length, data.size());
 	}
+	
+	@Test
+	public void testConstGeneration() {
+		int length = 100;
+		int value = 10;
+		Collection<Integer> data = Data.generateConstant(length, value);
+		for (Integer i : data){			
+			assertEquals(value, i.intValue());
+		}
+	}
 }
