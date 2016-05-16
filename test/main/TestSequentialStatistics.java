@@ -58,6 +58,7 @@ public class TestSequentialStatistics {
 	public void testMaxWithMedian() {
 		assertEquals(1, 1);
 	}
+	
 	@Test
 	public void testMinUnsorted() {
 		data = Data.generateConstant(10, 5.0);
@@ -81,5 +82,35 @@ public class TestSequentialStatistics {
 		
 		data = Data.generate(100);
 		assertEquals(new Double(0), SequentialStatistics.calculateMinSorted(data));
+	}
+
+	@Test
+	public void testStdDevWithoutMean(){
+		data = Data.generateConstant(10, 5);
+		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithoutMean(data));
+		
+		data.clear();
+		data.add(5.0);
+		data.add(10.0);
+		data.add(15.0);
+		data.add(20.0);
+		data.add(25.0);
+		
+		assertEquals(new Double(50), SequentialStatistics.calculateStdDevWithoutMean(data));
+	}
+	
+	@Test
+	public void testStdDevWithMean(){
+		data = Data.generateConstant(10, 5);
+		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithMean(data, 5.0));
+		
+		data.clear();
+		data.add(5.0);
+		data.add(10.0);
+		data.add(15.0);
+		data.add(20.0);
+		data.add(25.0);
+		
+		assertEquals(new Double(50), SequentialStatistics.calculateStdDevWithMean(data, 15.0));
 	}
 }

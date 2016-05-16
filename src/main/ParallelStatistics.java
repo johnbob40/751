@@ -9,8 +9,17 @@ public class ParallelStatistics {
 		System.out.println("hello world");
 	}
 
-	public static String[] calculate(Collection<Integer> data, boolean mean, boolean median, boolean max, boolean min, boolean stdDev, boolean intQuartRange, boolean skewness, boolean corrCoef){
+	public static String[] calculate(Collection<?> data, boolean mean,
+			boolean median, boolean max, boolean min, boolean stdDev,
+			boolean intQuartRange, boolean skewness, boolean corrCoef){
 		
+		if (data == null){
+			return null;
+		} else if (data.size() == 0){
+			return null;
+		}
+
+
 		return null;
 	}
 }
