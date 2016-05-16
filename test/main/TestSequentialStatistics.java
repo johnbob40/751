@@ -3,6 +3,7 @@ package main;
 import main.SequentialStatistics;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,9 @@ import org.junit.Test;
 public class TestSequentialStatistics {
 	private Collection<Double> data;
 	
+	public TestSequentialStatistics() {
+		data = Data.generateConstant(10, 5);
+	}
 	
 	@Test
 	public void testNullInputs() {
@@ -41,7 +45,6 @@ public class TestSequentialStatistics {
 	
 	@Test
 	public void testCalculateMaxUnsorted() {
-		data = Data.generateConstant(10, 5);
 		assertEquals(new Double(5), SequentialStatistics.calculateMaxUnsorted(data));
 		
 		data.clear();
@@ -56,13 +59,13 @@ public class TestSequentialStatistics {
 	}
 	
 	@Test
-	public void testMaxWithMedian() {
+	public void testMaxSorted() {
+		//TODO
 		assertEquals(1, 1);
 	}
 	
 	@Test
 	public void testMinUnsorted() {
-		data = Data.generateConstant(10, 5.0);
 		assertEquals(new Double(5.0), SequentialStatistics.calculateMinUnsorted(data));
 		
 		data.clear();
@@ -78,7 +81,6 @@ public class TestSequentialStatistics {
 
 	@Test
 	public void testMinSorted() {
-		data = Data.generateConstant(10, 5);
 		assertEquals(new Double(5), SequentialStatistics.calculateMinSorted(data));
 		
 		data = Data.generate(100);
@@ -87,7 +89,6 @@ public class TestSequentialStatistics {
 
 	@Test
 	public void testStdDevWithoutMean(){
-		data = Data.generateConstant(10, 5);
 		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithoutMean(data));
 		
 		data.clear();
@@ -95,14 +96,17 @@ public class TestSequentialStatistics {
 		data.add(10.0);
 		data.add(15.0);
 		data.add(20.0);
-		data.add(25.0);
 		
-		assertEquals(new Double(50), SequentialStatistics.calculateStdDevWithoutMean(data));
+		assertEquals(new Double(5.5901699437494745), SequentialStatistics.calculateStdDevWithoutMean(data));
+
+		data.add(25.0);
+		data.add(60.0);
+		
+		assertEquals(new Double(17.969882210706523), SequentialStatistics.calculateStdDevWithoutMean(data));
 	}
 	
 	@Test
 	public void testStdDevWithMean(){
-		data = Data.generateConstant(10, 5);
 		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithMean(data, 5.0));
 		
 		data.clear();
@@ -110,9 +114,26 @@ public class TestSequentialStatistics {
 		data.add(10.0);
 		data.add(15.0);
 		data.add(20.0);
-		data.add(25.0);
 		
-		assertEquals(new Double(50), SequentialStatistics.calculateStdDevWithMean(data, 15.0));
+		assertEquals(new Double(5.5901699437494745), SequentialStatistics.calculateStdDevWithMean(data, 12.5));
+		
+		data.add(25.0);
+		data.add(60.0);
+		
+		assertEquals(new Double(17.969882210706523), SequentialStatistics.calculateStdDevWithMean(data, 22.5));
+	}
+	
+	@Test
+	public void testSkewWithoutMean(){
+		data.clear();
+		data.add(5.0);
+		data.add(10.0);
+		data.add(15.0);
+		data.add(20.0);
+		data.add(25.0);
+		data.add(60.0);
+		
+		System.out.println(SequentialStatistics.calculateSkewWithoutMean(data));
 	}
 	
 	@Test
