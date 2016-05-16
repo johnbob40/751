@@ -7,23 +7,19 @@ import java.util.Random;
 
 public class Data {
 
-	public static Collection<Integer> generate(int length){
-		Collection<Integer> data = new ArrayList<Integer>();
+	public static Collection<Double> generate(int length){
+		Collection<Double> data = new ArrayList<Double>();
 		for (int i = 0; i < length; i++){
-			data.add(i);
+			data.add((double) i);
 		}
 		return data;
 	}
-	public static Collection<Integer> generateConstant(int length, int number){
-		Collection<Integer> data = new ArrayList<Integer>();
+	public static Collection<Double> generateConstant(int length, double number){
+		Collection<Double> data = new ArrayList<Double>();
 		for (int i = 0; i < length; i++){
-			data.add(number);
+			data.add((double)number);
 		}
 		return data;
-	}
-	
-	public static Collection<Integer> sort(Collection<Integer> data){
-		return null;
 	}
 	
 	public static List<Double> generateRandomList(int length) {

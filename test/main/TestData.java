@@ -12,17 +12,19 @@ public class TestData {
 	@Test
 	public void testLength() {
 		int length = 100;
-		Collection<Integer> data = Data.generate(length);
+		Collection<Double> data = Data.generate(length);
 		assertEquals(length, data.size());
 	}
 	
 	@Test
 	public void testConstGeneration() {
 		int length = 100;
-		int value = 10;
-		Collection<Integer> data = Data.generateConstant(length, value);
-		for (Integer i : data){			
-			assertEquals(value, i.intValue());
+		float value = 10.0f;
+		Collection<Double> data = Data.generateConstant(length, value);
+		for (Double i : data){			
+			if (i != value){
+				fail();
+			}
 		}
 	}
 }
