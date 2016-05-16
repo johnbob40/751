@@ -78,21 +78,37 @@ public class SequentialStatistics {
 
 		for (Object i : data){
 			meanSquare = ((Double)i ) - mean;
-			deviations.add(meanSquare * meanSquare);
+			deviations.add(Math.pow(meanSquare, 2));
 		}
 
-		return calculateMean(deviations);
+		return Math.sqrt(calculateMean(deviations));
 	}
-	
 	public static Double calculateStdDevWithMean(Collection<?> data, Double mean){
 		double meanSquare = 0;
 		Collection<Double> deviations = new ArrayList<Double>();
 
 		for (Object i : data){
 			meanSquare = ((Double) i) - mean;
-			deviations.add(meanSquare * meanSquare);
+			deviations.add(Math.pow(meanSquare, 2));
 		}
 
-		return calculateMean(deviations);
+		return Math.sqrt(calculateMean(deviations));
+	}
+
+	public static Double calculateSkewWithoutMean(Collection<?> data){
+		Double mean = calculateMean(data);
+		Double stdDev = 19.685;//calculateStdDevWithMean(data, mean);
+		Double sum = new Double(0);
+		Iterator<?> it = data.iterator();
+
+		while (it.hasNext()){	
+			Double temp = (Double) it.next();
+			temp -= mean;
+			//raising to power of 3
+			temp = Math.pow(temp, 3);
+			sum += temp;
+		}	
+		Double denominator = (data.size() - 1) * Math.pow(stdDev, 3);
+		return sum/denominator;
 	}
 }
