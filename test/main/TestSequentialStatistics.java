@@ -4,6 +4,7 @@ import main.SequentialStatistics;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test; 
@@ -66,5 +67,19 @@ public class TestSequentialStatistics {
 	@Test
 	public void testMinWithMedian() {
 		assertEquals(1, 1);
+	}
+	
+	// Need to do other data types as well
+	@Test
+	public void testSort() {
+		Collection<?> dataCollection = Data.sort(Data.generateRandomList(100));
+		Iterator<?> it = dataCollection.iterator();
+		Double prevDataPoint = Double.MIN_VALUE;
+		Double nextDataPoint;
+		while (it.hasNext()) {
+			nextDataPoint = (Double)it.next();
+			assertTrue(nextDataPoint >= prevDataPoint);
+			prevDataPoint = nextDataPoint;
+		}
 	}
 }

@@ -6,7 +6,7 @@ public class ParallelStatistics {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("hello world");
+		System.out.println(Data.generateRandomList(10));
 	}
 
 	public static String[] calculate(Collection<Integer> data, boolean mean, boolean median, boolean max, boolean min, boolean stdDev, boolean intQuartRange, boolean skewness, boolean corrCoef){

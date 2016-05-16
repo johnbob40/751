@@ -32,4 +32,5 @@ public class SequentialStatistics {
 		}	
 		return max;
 	}
+	
 }
