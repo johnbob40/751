@@ -10,7 +10,7 @@ import org.junit.Test;
 
 
 public class TestSequentialStatistics {
-	private Collection<Integer> data;
+	private Collection<Double> data;
 	
 	
 	@Test
@@ -26,12 +26,12 @@ public class TestSequentialStatistics {
 		}
 		//Can't really test that it works with a random set, as nothing to compare it to. so using another premade set
 		data.clear();
-		data.add(5);
-		data.add(15);
-		data.add(25);
-		data.add(35);
-		data.add(45);
-		data.add(55);
+		data.add(5.0);
+		data.add(15.0);
+		data.add(25.0);
+		data.add(35.0);
+		data.add(45.0);
+		data.add(55.0);
 		
 		if (SequentialStatistics.calculateMean(data) != 30.0f){
 			fail();
@@ -41,17 +41,17 @@ public class TestSequentialStatistics {
 	@Test
 	public void testCalculateMaxUnsorted() {
 		data = Data.generateConstant(10, 5);
-		assertEquals(new Integer(5), SequentialStatistics.calculateMaxUnsorted(data));
+		assertEquals(new Double(5), SequentialStatistics.calculateMaxUnsorted(data));
 		
 		data.clear();
-		data.add(65);
-		data.add(15);
-		data.add(75);
-		data.add(35);
-		data.add(45);
-		data.add(55);
+		data.add(65.0);
+		data.add(15.0);
+		data.add(75.0);
+		data.add(35.0);
+		data.add(45.0);
+		data.add(55.0);
 		
-		assertEquals(new Integer(75), SequentialStatistics.calculateMaxUnsorted(data));
+		assertEquals(new Double(75), SequentialStatistics.calculateMaxUnsorted(data));
 	}
 	
 	@Test
@@ -60,22 +60,26 @@ public class TestSequentialStatistics {
 	}
 	@Test
 	public void testMinUnsorted() {
-		data = Data.generateConstant(10, 5);
-		assertEquals(new Integer(5), SequentialStatistics.calculateMinUnsorted(data));
+		data = Data.generateConstant(10, 5.0);
+		assertEquals(new Double(5.0), SequentialStatistics.calculateMinUnsorted(data));
 		
 		data.clear();
-		data.add(65);
-		data.add(15);
-		data.add(75);
-		data.add(35);
-		data.add(45);
-		data.add(55);
+		data.add(65.0);
+		data.add(15.0);
+		data.add(75.0);
+		data.add(35.0);
+		data.add(45.0);
+		data.add(55.0);
 		
-		assertEquals(new Integer(15), SequentialStatistics.calculateMinUnsorted(data));
+		assertEquals(new Double(15.0), SequentialStatistics.calculateMinUnsorted(data));
 	}
-	
+
 	@Test
-	public void testMinWithMedian() {
-		assertEquals(1, 1);
+	public void testMinSorted() {
+		data = Data.generateConstant(10, 5);
+		assertEquals(new Double(5), SequentialStatistics.calculateMinSorted(data));
+		
+		data = Data.generate(100);
+		assertEquals(new Double(0), SequentialStatistics.calculateMinSorted(data));
 	}
 }

@@ -1,52 +1,80 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 public class SequentialStatistics {
 
-	public static String[] calculate(Collection<Integer> data, boolean mean,
+	public static String[] calculate(Collection<?> data, boolean mean,
 							boolean median, boolean max, boolean min, boolean stdDev,
 							boolean intQuartRange, boolean skewness, boolean corrCoef){
 		return null;
 	}
 	
-	public static float calculateMean(Collection<Integer> data){
+	public static double calculateMean(Collection<?> data){
 		//BigInteger sum = new BigInteger("0");
-		Long sum = new Long(0);
-		for (Integer i : data){
-			sum += i;
+		Double sum = new Double(0);
+		Double value = new Double(0);
+		
+		for (Object i : data){
+			value = (double) i;
+			sum += value;
 		}
 		return sum/data.size();
 	}
 	
-	public static Integer calculateMaxUnsorted(Collection<Integer> data){
-		Iterator<Integer> it = data.iterator();
+	public static Double calculateMaxUnsorted(Collection<?> data){
+		Iterator<?> it = data.iterator();
 		
 		//Getting the first element to use as the reference max
-		Integer max = it.next();
+		Double max = (Double) it.next();
 
 		while (it.hasNext()){	
-			Integer temp = it.next();
+			Double temp = (Double) it.next();
 			if (temp > max){
 				max = temp;
 			}
 		}	
 		return max;
 	}
+	public static Double calculateMaxSorted(Collection<?> data) {
+		//TODO this should not iterate. THis should be const time
+		Iterator<?> it = data.iterator();
+		return (Double) it.next();
 	
-	public static Integer calculateMinUnsorted(Collection<Integer> data){
-		Iterator<Integer> it = data.iterator();
+	}
+	
+	public static Double calculateMinUnsorted(Collection<?> data){
+		Iterator<?> it = data.iterator();
 		
 		//Getting the first element to use as the reference min
-		Integer min = it.next();
+		Double min = (Double) it.next();
 		
 		while (it.hasNext()){	
-			Integer temp = it.next();
+			Double temp = (Double) it.next();
 			if (temp < min){
 				min = temp;
 			}
 		}	
 		return min;
 	}
+	public static Object calculateMinSorted(Collection<?> data) {
+		Iterator<?> it = data.iterator();
+		return it.next();
+	}
+	
+	public static double calculateStdDev(Collection<?> data){
+		double mean = calculateMean(data);
+		double meanSquare = 0;
+		Collection<Double> deviations = new ArrayList<Double>();
+		
+		for (Object i : data){
+			meanSquare = ((Double)i ) - mean;
+			deviations.add(meanSquare * meanSquare);
+		}
+		
+		return calculateMean(deviations);
+	}
+
 }
