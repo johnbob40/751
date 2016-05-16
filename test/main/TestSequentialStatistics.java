@@ -116,8 +116,21 @@ public class TestSequentialStatistics {
 	}
 	
 	@Test
-	public void testSort() {
+	public void testSortOnUnsorted() {
 		Collection<Double> dataCollection = SequentialStatistics.sequentialSort(Data.generateRandomList(100000));
+		Iterator<Double> it = dataCollection.iterator();
+		Double prevDataPoint = Double.MIN_VALUE;
+		Double nextDataPoint;
+		while (it.hasNext()) {
+			nextDataPoint = (Double)it.next();
+			assertTrue(nextDataPoint >= prevDataPoint);
+			prevDataPoint = nextDataPoint;
+		}
+	}
+	
+	@Test
+	public void testSortOnSorted() {
+		Collection<Double> dataCollection = SequentialStatistics.sequentialSort(Data.generateConstant(100000, 999));
 		Iterator<Double> it = dataCollection.iterator();
 		Double prevDataPoint = Double.MIN_VALUE;
 		Double nextDataPoint;
