@@ -59,8 +59,19 @@ public class TestSequentialStatistics {
 		assertEquals(1, 1);
 	}
 	@Test
-	public void testMinWithoutMedian() {
-		assertEquals(1, 1);
+	public void testMinUnsorted() {
+		data = Data.generateConstant(10, 5);
+		assertEquals(new Integer(5), SequentialStatistics.calculateMinUnsorted(data));
+		
+		data.clear();
+		data.add(65);
+		data.add(15);
+		data.add(75);
+		data.add(35);
+		data.add(45);
+		data.add(55);
+		
+		assertEquals(new Integer(15), SequentialStatistics.calculateMinUnsorted(data));
 	}
 	
 	@Test

@@ -23,13 +23,30 @@ public class SequentialStatistics {
 	public static Integer calculateMaxUnsorted(Collection<Integer> data){
 		Iterator<Integer> it = data.iterator();
 		
+		//Getting the first element to use as the reference max
 		Integer max = it.next();
-		
-		for (Integer i : data){
-			if (i > max){
-				max = i;
+
+		while (it.hasNext()){	
+			Integer temp = it.next();
+			if (temp > max){
+				max = temp;
 			}
 		}	
 		return max;
+	}
+	
+	public static Integer calculateMinUnsorted(Collection<Integer> data){
+		Iterator<Integer> it = data.iterator();
+		
+		//Getting the first element to use as the reference min
+		Integer min = it.next();
+		
+		while (it.hasNext()){	
+			Integer temp = it.next();
+			if (temp < min){
+				min = temp;
+			}
+		}	
+		return min;
 	}
 }
