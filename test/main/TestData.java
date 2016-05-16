@@ -14,6 +14,13 @@ public class TestData {
 		int length = 100;
 		Collection<Double> data = Data.generate(length);
 		assertEquals(length, data.size());
+		data = Data.generateConstant(length, 99);
+		assertEquals(length, data.size());
+		data = Data.generateRandomList(length);
+		assertEquals(length, data.size());
+		data = Data.generateConsecutiveList(length, 20, 15);
+		System.out.println(data);
+		assertEquals(length, data.size());
 	}
 	
 	@Test
@@ -27,4 +34,5 @@ public class TestData {
 			}
 		}
 	}
+
 }

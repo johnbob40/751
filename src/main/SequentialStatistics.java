@@ -99,13 +99,26 @@ public class SequentialStatistics {
 		return calculateMean(deviations);
 	}
 	
-	public static Collection<Double> sequentialSort(Collection<?> data) {
+	public static List<Double> sequentialSort(Collection<?> data) {
 		List<Double> listToSort = new ArrayList<Double>();
 		Iterator<?> it = data.iterator();
 		while (it.hasNext()) {
 			listToSort.add((Double)it.next());
 		}
-		Collections.sort(listToSort);
+		Collections.sort(listToSort); // Using java native sort function
 		return listToSort;
+	}
+	
+	public static Double calculateMedian(Collection<?> data) {
+		List<Double> sortedCollection = sequentialSort(data);
+		int size = sortedCollection.size();
+		if (size % 2 == 0) {
+			double medianLeft = sortedCollection.get((size / 2) - 1);
+			double medianRight = sortedCollection.get(size / 2);
+			double diff = Math.abs(medianLeft - medianRight);
+			return Math.min(medianLeft, medianRight) + (diff / 2);
+		} else {
+			return sortedCollection.get((size - 1) / 2);
+		}
 	}
 }

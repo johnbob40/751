@@ -22,7 +22,7 @@ public class TestSequentialStatistics {
 	@Test
 	public void testMean() {
 		data = Data.generateConstant(100, 10);
-		if (SequentialStatistics.calculateMean(data) != 10.0f){
+		if (SequentialStatistics.calculateMean(data) != 10){
 			fail();
 		}
 		//Can't really test that it works with a random set, as nothing to compare it to. so using another premade set
@@ -139,5 +139,13 @@ public class TestSequentialStatistics {
 			assertTrue(nextDataPoint >= prevDataPoint);
 			prevDataPoint = nextDataPoint;
 		}
+	}
+	
+	@Test
+	public void testMedian() {
+		Collection<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		assertEquals(54.5, SequentialStatistics.calculateMedian(data), 0.0001);
+		data = Data.generateConsecutiveList(11, 50, 5);
+		assertEquals(55.0, SequentialStatistics.calculateMedian(data), 0.0001);
 	}
 }
