@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test; 
@@ -25,9 +26,8 @@ public class TestSequentialStatistics {
 
 	@Test
 	public void testMean() {
-		if (SequentialStatistics.calculateMean(data) != 5.0f){
-			fail();
-		}
+		data = Data.generateConstant(100, 10);
+		assertEquals(new Double(10.0), SequentialStatistics.calculateMean(data), 0.0);
 		//Can't really test that it works with a random set, as nothing to compare it to. so using another premade set
 		data.clear();
 		data.add(5.0);
@@ -37,9 +37,7 @@ public class TestSequentialStatistics {
 		data.add(45.0);
 		data.add(55.0);
 		
-		if (SequentialStatistics.calculateMean(data) != 30.0f){
-			fail();
-		} 
+		assertEquals(new Double(30.0), SequentialStatistics.calculateMean(data), 0.0);
 	}
 	
 	@Test
@@ -200,5 +198,39 @@ public class TestSequentialStatistics {
 		data.add(25.0);
 		assertEquals(new Double(0.6776),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
 		
+	}
+
+	@Test
+	public void testSortOnUnsorted() {
+		Collection<Double> dataCollection = SequentialStatistics.sequentialSort(Data.generateRandomList(100000));
+		Iterator<Double> it = dataCollection.iterator();
+		Double prevDataPoint = Double.MIN_VALUE;
+		Double nextDataPoint;
+		while (it.hasNext()) {
+			nextDataPoint = (Double)it.next();
+			assertTrue(nextDataPoint >= prevDataPoint);
+			prevDataPoint = nextDataPoint;
+		}
+	}
+	
+	@Test
+	public void testSortOnSorted() {
+		Collection<Double> dataCollection = SequentialStatistics.sequentialSort(Data.generateConstant(100000, 999));
+		Iterator<Double> it = dataCollection.iterator();
+		Double prevDataPoint = Double.MIN_VALUE;
+		Double nextDataPoint;
+		while (it.hasNext()) {
+			nextDataPoint = (Double)it.next();
+			assertTrue(nextDataPoint >= prevDataPoint);
+			prevDataPoint = nextDataPoint;
+		}
+	}
+	
+	@Test
+	public void testMedian() {
+		Collection<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		assertEquals(54.5, SequentialStatistics.calculateMedian(data), 0.0001);
+		data = Data.generateConsecutiveList(11, 50, 5);
+		assertEquals(55.0, SequentialStatistics.calculateMedian(data), 0.0001);
 	}
 }

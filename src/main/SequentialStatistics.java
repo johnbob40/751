@@ -2,7 +2,9 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class SequentialStatistics {
 
@@ -45,6 +47,7 @@ public class SequentialStatistics {
 		}	
 		return max;
 	}
+
 	public static Double calculateMaxSorted(Collection<?> data) {
 		//TODO this should not iterate. THis should be const time
 		Iterator<?> it = data.iterator();
@@ -113,5 +116,28 @@ public class SequentialStatistics {
 		}	
 		Double denominator = (data.size() - 1) * Math.pow(stdDev, 3);
 		return sum/denominator;
+	}
+	
+	public static List<Double> sequentialSort(Collection<?> data) {
+		List<Double> listToSort = new ArrayList<Double>();
+		Iterator<?> it = data.iterator();
+		while (it.hasNext()) {
+			listToSort.add((Double)it.next());
+		}
+		Collections.sort(listToSort); // Using java native sort function
+		return listToSort;
+	}
+	
+	public static Double calculateMedian(Collection<?> data) {
+		List<Double> sortedCollection = sequentialSort(data);
+		int size = sortedCollection.size();
+		if (size % 2 == 0) {
+			double medianLeft = sortedCollection.get((size / 2) - 1);
+			double medianRight = sortedCollection.get(size / 2);
+			double diff = Math.abs(medianLeft - medianRight);
+			return Math.min(medianLeft, medianRight) + (diff / 2);
+		} else {
+			return sortedCollection.get((size - 1) / 2);
+		}
 	}
 }
