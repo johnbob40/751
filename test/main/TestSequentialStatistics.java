@@ -16,7 +16,8 @@ public class TestSequentialStatistics {
 	public TestSequentialStatistics() {
 		data = Data.generateConstant(10, 5);
 	}
-	
+
+
 	@Test
 	public void testNullInputs() {
 		assertNull(SequentialStatistics.calculate(null, false, false, false, false, false, false, false, false));
@@ -85,8 +86,10 @@ public class TestSequentialStatistics {
 		assertEquals(new Double(0), SequentialStatistics.calculateMinSorted(data));
 	}
 
+
 	@Test
 	public void testStdDevWithoutMean(){
+		
 		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithoutMean(data));
 		
 		data.clear();
@@ -95,14 +98,39 @@ public class TestSequentialStatistics {
 		data.add(15.0);
 		data.add(20.0);
 		
-		assertEquals(new Double(5.5901699437494745), SequentialStatistics.calculateStdDevWithoutMean(data));
+		assertEquals(new Double(5.59), SequentialStatistics.calculateStdDevWithoutMean(data), 0.1);
 
 		data.add(25.0);
 		data.add(60.0);
 		
-		assertEquals(new Double(17.969882210706523), SequentialStatistics.calculateStdDevWithoutMean(data));
+		assertEquals(new Double(17.96), SequentialStatistics.calculateStdDevWithoutMean(data), 0.1);
+
+		 
+		data.clear();
+		data.add(9.0);
+		data.add(2.0);
+		data.add(5.0);
+		data.add(4.0);
+		data.add(12.0);
+		data.add(7.0);
+		data.add(8.0);
+		data.add(11.0);
+		data.add(9.0);
+		data.add(3.0);
+		data.add(7.0);
+		data.add(4.0);
+		data.add(12.0);
+		data.add(5.0);
+		data.add(4.0);
+		data.add(10.0);
+		data.add(9.0);
+		data.add(6.0);
+		data.add(9.0);
+		data.add(4.0);
+		assertEquals(new Double(2.983), SequentialStatistics.calculateStdDevWithoutMean(data), 0.1);
+
 	}
-	
+
 	@Test
 	public void testStdDevWithMean(){
 		assertEquals(new Double(0.0), SequentialStatistics.calculateStdDevWithMean(data, 5.0));
@@ -113,24 +141,64 @@ public class TestSequentialStatistics {
 		data.add(15.0);
 		data.add(20.0);
 		
-		assertEquals(new Double(5.5901699437494745), SequentialStatistics.calculateStdDevWithMean(data, 12.5));
+		assertEquals(new Double(5.59), SequentialStatistics.calculateStdDevWithMean(data, 12.5), 0.1);
 		
 		data.add(25.0);
 		data.add(60.0);
 		
-		assertEquals(new Double(17.969882210706523), SequentialStatistics.calculateStdDevWithMean(data, 22.5));
-	}
+		assertEquals(new Double(17.96), SequentialStatistics.calculateStdDevWithMean(data, 22.5), 0.1);
+		
+		data.clear();
+		data.add(9.0);
+		data.add(2.0);
+		data.add(5.0);
+		data.add(4.0);
+		data.add(12.0);
+		data.add(7.0);
+		data.add(8.0);
+		data.add(11.0);
+		data.add(9.0);
+		data.add(3.0);
+		data.add(7.0);
+		data.add(4.0);
+		data.add(12.0);
+		data.add(5.0);
+		data.add(4.0);
+		data.add(10.0);
+		data.add(9.0);
+		data.add(6.0);
+		data.add(9.0);
+		data.add(4.0);
+		assertEquals(new Double(2.983), SequentialStatistics.calculateStdDevWithMean(data, 7.0), 0.1);
+
 	
+	}
 	@Test
 	public void testSkewWithoutMean(){
+		assertTrue(Double.isNaN(SequentialStatistics.calculateSkewWithoutMean(data)));
 		data.clear();
 		data.add(5.0);
 		data.add(10.0);
 		data.add(15.0);
 		data.add(20.0);
 		data.add(25.0);
-		data.add(60.0);
+		assertEquals(new Double(0),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+
+		data.add(-50.0);
 		
-		System.out.println(SequentialStatistics.calculateSkewWithoutMean(data));
+		assertEquals(new Double(-1.395),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+
+		data.clear();
+		data.add(5.0);
+		data.add(5.0);
+		data.add(5.0);
+		data.add(5.0);
+		
+		data.add(10.0);
+		data.add(15.0);
+		data.add(20.0);
+		data.add(25.0);
+		assertEquals(new Double(0.6776),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		
 	}
 }

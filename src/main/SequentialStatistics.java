@@ -75,14 +75,13 @@ public class SequentialStatistics {
 		double mean = calculateMean(data);
 		double meanSquare = 0;
 		Collection<Double> deviations = new ArrayList<Double>();
-
 		for (Object i : data){
 			meanSquare = ((Double)i ) - mean;
 			deviations.add(Math.pow(meanSquare, 2));
 		}
-
 		return Math.sqrt(calculateMean(deviations));
 	}
+	
 	public static Double calculateStdDevWithMean(Collection<?> data, Double mean){
 		double meanSquare = 0;
 		Collection<Double> deviations = new ArrayList<Double>();
@@ -95,9 +94,13 @@ public class SequentialStatistics {
 		return Math.sqrt(calculateMean(deviations));
 	}
 
+	
 	public static Double calculateSkewWithoutMean(Collection<?> data){
+		System.out.println(data);
 		Double mean = calculateMean(data);
-		Double stdDev = 19.685;//calculateStdDevWithMean(data, mean);
+		Double stdDev = calculateStdDevWithMean(data, mean);
+		System.out.println("mean = " + mean);
+		System.out.println("stdDev = " + stdDev + "\n\n");
 		Double sum = new Double(0);
 		Iterator<?> it = data.iterator();
 
