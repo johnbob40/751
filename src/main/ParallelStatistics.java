@@ -1,22 +1,18 @@
 package main;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 public class ParallelStatistics {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(Data.generateRandomList(10));
-	}
-
-	public static String[] calculate(Collection<?> data, boolean mean,
+	public static HashMap<String, Double> calculate(Collection<?> inputData, boolean mean,
 			boolean median, boolean max, boolean min, boolean stdDev,
-			boolean intQuartRange, boolean skewness, boolean corrCoef){
+			boolean intQuartRange, boolean skewness){
 		
-		if (data == null){
-			return null;
-		} else if (data.size() == 0){
-			return null;
+		HashMap<String, Double> results = new HashMap<String, Double>();
+
+		if (inputData == null || inputData.size() == 0){
+			return results;
 		}
 
 
