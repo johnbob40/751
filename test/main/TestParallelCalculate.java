@@ -34,3 +34,4 @@ public class TestParallelCalculate {
 		results = ParallelStatistics.calculate(data, false, false, false, false, false, false, false);
 		assertEquals(results.size(), 0);
 	}
+}
