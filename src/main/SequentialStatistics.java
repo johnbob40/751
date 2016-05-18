@@ -46,12 +46,13 @@ public class SequentialStatistics {
 				if (min){
 					results.put("min",calculateMinSorted(sortedData));
 				}
-			}
-			if (max){
-				results.put("max", calculateMaxUnsorted(inputData));
-			}
-			if (min){
-				results.put("min",calculateMinUnsorted(inputData));
+			} else {
+				if (max){
+					results.put("max", calculateMaxUnsorted(inputData));
+				}
+				if (min){
+					results.put("min",calculateMinUnsorted(inputData));
+				}
 			}
 		}
 		if (stdDev){
