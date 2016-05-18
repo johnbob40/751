@@ -207,6 +207,8 @@ public class SequentialStatistics {
 	}
 	public static List<Double> sequentialSort(Collection<?> data) {
 		List<Double> listToSort = new ArrayList<Double>();
+
+		//creating copy of collection and converting to list for data integrity
 		Iterator<?> it = data.iterator();
 		while (it.hasNext()) {
 			listToSort.add((Double)it.next());

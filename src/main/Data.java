@@ -14,6 +14,13 @@ public class Data {
 		}
 		return data;
 	}
+	public static Collection<Double> generateReverse(int length) {
+		Collection<Double> data = new ArrayList<Double>();
+		for (int i = 0; i < length; i++){
+			data.add((double) length - i);
+		}
+		return data;
+	}
 	public static Collection<Double> generateConstant(int length, double number){
 		Collection<Double> data = new ArrayList<Double>();
 		for (int i = 0; i < length; i++){
