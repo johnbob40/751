@@ -22,7 +22,7 @@ public class Main {
 
 		timeStart = System.currentTimeMillis();
 		System.out.println("starting second round");
-		SequentialStatistics.calculate(data, true, false, true, true, true, true, true);
+		SequentialStatistics.calculate(data, true, false, true, true, true, false, true);
 
 		timeEnd = System.currentTimeMillis();
 		System.out.println("calculation done");
