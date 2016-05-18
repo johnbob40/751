@@ -59,4 +59,14 @@ public class TestSequentialCalculate {
 		assertEquals(results.get("stdDev"), 28.86, 0.1);
 	}
 	
+	@Test
+	public void testDataIntegrity(){
+		data = Data.generateReverse(5);
+		Collection<Double> data1 = Data.generateReverse(5);
+		System.out.println(data1);
+		SequentialStatistics.calculate(data, true, true, false, false, false, false, false);
+		System.out.println(data);
+		assertEquals(data, data1);
+	}
+	
 }
