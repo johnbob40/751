@@ -2,10 +2,17 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class Data {
+	
+	public enum DataType{INT, FLOAT, DOUBLE, LONG}
+	public enum CollectionType{ARRAY_LIST, LINKED_LIST, HASH_MAP, TREE_MAP}
 
 	public static Collection<Double> generate(int length){
 		Collection<Double> data = new ArrayList<Double>();
@@ -29,6 +36,89 @@ public class Data {
 			data.add(r.nextDouble() * 1000);
 		}
 		return data;
+	}
+	
+	public static List<?> generateRandomList(long length, DataType dataType, CollectionType colType) {
+		Object data;
+		if (colType == CollectionType.ARRAY_LIST) {
+			if (dataType == DataType.DOUBLE) {
+				data = new ArrayList<Double>();
+			} else if (dataType == DataType.INT) {
+				data = new ArrayList<Integer>();
+			} else if (dataType == DataType.FLOAT) {
+				data = new ArrayList<Float>();
+			} else if (dataType == DataType.LONG) {
+				data = new ArrayList<Long>();
+			} else {
+				data = null;
+			}
+		} else if (colType == CollectionType.LINKED_LIST) {
+			if (dataType == DataType.DOUBLE) {
+				data = new LinkedList<Double>();
+			} else if (dataType == DataType.INT) {
+				data = new LinkedList<Integer>();
+			} else if (dataType == DataType.FLOAT) {
+				data = new LinkedList<Float>();
+			} else if (dataType == DataType.LONG) {
+				data = new LinkedList<Long>();
+			} else {
+				data = null;
+			}
+		} else if (colType == CollectionType.HASH_MAP) {
+			if (dataType == DataType.DOUBLE) {
+				data = new HashMap<String, Double>();
+			} else if (dataType == DataType.INT) {
+				data = new HashMap<String, Integer>();
+			} else if (dataType == DataType.FLOAT) {
+				data = new HashMap<String, Float>();
+			} else if (dataType == DataType.LONG) {
+				data = new HashMap<String, Long>();
+			} else {
+				data = null;
+			}
+		} else if (colType == CollectionType.TREE_MAP) {
+			if (dataType == DataType.DOUBLE) {
+				data = new TreeMap<String, Double>();
+			} else if (dataType == DataType.INT) {
+				data = new TreeMap<String, Integer>();
+			} else if (dataType == DataType.FLOAT) {
+				data = new TreeMap<String, Float>();
+			} else if (dataType == DataType.LONG) {
+				data = new TreeMap<String, Long>();
+			} else {
+				data = null;
+			}
+		} else {
+			data = null;
+		}
+		
+		Random r = new Random();
+		if (data instanceof List) {
+			for (int i = 0; i < length; i++) {
+				if (dataType == DataType.DOUBLE) {
+					((List)data).add(r.nextDouble() * 100);
+				} else if (dataType == DataType.INT) {
+					((List)data).add(r.nextInt());
+				} else if (dataType == DataType.FLOAT) {
+					((List)data).add(r.nextFloat() * 100);
+				} else if (dataType == DataType.LONG) {
+					((List)data).add(r.nextLong());
+				} 
+			}
+		} else if (data instanceof Map) {
+			for (int i = 0; i < length; i++) {
+				if (dataType == DataType.DOUBLE) {
+					((Map)data).add(r.nextDouble() * 100);
+				} else if (dataType == DataType.INT) {
+					((Map)data).add(r.nextInt());
+				} else if (dataType == DataType.FLOAT) {
+					((Map)data).add(r.nextFloat() * 100);
+				} else if (dataType == DataType.LONG) {
+					((Map)data).add(r.nextLong());
+				} 
+			}
+		}
+		
 	}
 	
 	public static List<Double> generateConsecutiveList(int length, double start, int shift) {
