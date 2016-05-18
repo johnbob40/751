@@ -20,12 +20,20 @@ public class TestSequentialCalculate {
 
 	@Test
 	public void testNullInputs() {
-		HashMap<String, Double> result = SequentialStatistics.calculate(null, false, false, false, false, false, false, false);
-		assertEquals(result.size(), 0);
-		
+		results = SequentialStatistics.calculate(null, false, false, false, false, false, false, false);
+		assertEquals(results.size(), 0);
+	}
+	
+	@Test
+	public void testCalculateWithNoData(){
 		data.clear();
-		result = SequentialStatistics.calculate(data, false, false, false, false, false, false, false);
-		assertEquals(result.size(), 0);
+		results = SequentialStatistics.calculate(data, false, false, false, false, false, false, false);
+		assertEquals(results.size(), 0);
+	}
+	@Test
+	public void testCalculateNothing(){
+		results = SequentialStatistics.calculate(data, false, false, false, false, false, false, false);
+		assertEquals(results.size(), 0);
 	}
 	
 	@Test
