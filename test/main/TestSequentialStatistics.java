@@ -232,4 +232,23 @@ public class TestSequentialStatistics {
 		data = SequentialStatistics.sequentialSort(data);		
 		assertEquals(55.0, SequentialStatistics.calculateMedian(data), 0.0001);
 	}
+	
+	@Test
+	public void testQuartileRange() {
+		List<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);
+		assertEquals(5.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(11, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(6.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(12, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(6.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(13, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(7.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+	}
 }

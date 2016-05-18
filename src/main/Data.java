@@ -13,6 +13,8 @@ public class Data {
 	
 	public enum DataType{INT, FLOAT, DOUBLE, LONG}
 	public enum CollectionType{ARRAY_LIST, LINKED_LIST, HASH_MAP, TREE_MAP}
+	
+	private static Random stringGen = new Random();
 
 	public static Collection<Double> generate(int length){
 		Collection<Double> data = new ArrayList<Double>();
@@ -38,7 +40,7 @@ public class Data {
 		return data;
 	}
 	
-	public static List<?> generateRandomList(long length, DataType dataType, CollectionType colType) {
+	public static Object generateRandomData(long length, DataType dataType, CollectionType colType) {
 		Object data;
 		if (colType == CollectionType.ARRAY_LIST) {
 			if (dataType == DataType.DOUBLE) {
@@ -108,17 +110,26 @@ public class Data {
 		} else if (data instanceof Map) {
 			for (int i = 0; i < length; i++) {
 				if (dataType == DataType.DOUBLE) {
-					((Map)data).add(r.nextDouble() * 100);
+					((Map)data).put(generateRandomString(), r.nextDouble() * 100);
 				} else if (dataType == DataType.INT) {
-					((Map)data).add(r.nextInt());
+					((Map)data).put(generateRandomString(), r.nextInt());
 				} else if (dataType == DataType.FLOAT) {
-					((Map)data).add(r.nextFloat() * 100);
+					((Map)data).put(generateRandomString(), r.nextFloat() * 100);
 				} else if (dataType == DataType.LONG) {
-					((Map)data).add(r.nextLong());
+					((Map)data).put(generateRandomString(), r.nextLong());
 				} 
 			}
 		}
-		
+		return data;		
+	}
+	
+	private static String generateRandomString() {
+		String keyset = "abcdefghijklmnopqrstuvwxyz";
+		String randomString = "";
+		for (int i = 0; i < 10; i++) {
+			randomString = randomString + keyset.charAt(stringGen.nextInt(26));
+		}
+		return randomString;
 	}
 	
 	public static List<Double> generateConsecutiveList(int length, double start, int shift) {

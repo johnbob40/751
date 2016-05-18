@@ -27,6 +27,9 @@ public class SequentialStatistics {
 		if (median){
 			sortedData = sequentialSort(inputData);
 			results.put("median", calculateMedian(sortedData));
+			if (intQuartRange) {
+				results.put("interquartile range", calculateQuartileRange(sortedData));
+			}
 			if (max){
 				results.put("max", calculateMaxSorted(sortedData));
 			}
@@ -34,6 +37,10 @@ public class SequentialStatistics {
 				results.put("min",calculateMinSorted(sortedData));
 			}
 		} else {
+			if (intQuartRange) {
+				sortedData = sequentialSort(inputData);
+				results.put("interquartile range", calculateQuartileRange(sortedData));
+			}
 			if (max){
 				results.put("max", calculateMaxUnsorted(inputData));
 			}
@@ -116,6 +123,7 @@ public class SequentialStatistics {
 		}	
 		return min;
 	}
+	
 	public static Double calculateMinSorted(Collection<?> data) {
 		Iterator<?> it = data.iterator();
 		return (Double) it.next();
@@ -215,7 +223,7 @@ public class SequentialStatistics {
 		return listToSort;
 	}
 
-	public static Double calculateMedian(List<?> data) {
+	public static double calculateMedian(List<?> data) {
 		int size = data.size();
 		if (size % 2 == 0) {
 			double medianLeft = (double) data.get((size / 2) - 1);
@@ -223,11 +231,52 @@ public class SequentialStatistics {
 			double diff = Math.abs(medianLeft - medianRight);
 			return Math.min(medianLeft, medianRight) + (diff / 2);
 		} else {
-			return (Double) data.get((size - 1) / 2);
+			return (double) data.get((size - 1) / 2);
 		}
 	}
+	
 	public static List<?> sort(Collection<?> data){
 		return sequentialSort(data);
-
+	}
+	
+	public static Double calculateQuartileRange(List<?> data) {
+		double leftQuartile;
+		double rightQuartile;
+		int size = data.size();
+		if (size < 4) {
+			return null;
+		} 
+		if (size % 2 == 0) {
+			int halfSize = size / 2;
+			if (halfSize % 2 == 0) {
+				double leftQuartileLeft = (double) data.get((halfSize / 2) - 1);
+				double leftQuartileRight = (double) data.get(halfSize / 2);
+				double diff = Math.abs(leftQuartileLeft - leftQuartileRight);
+				leftQuartile = Math.min(leftQuartileLeft, leftQuartileRight) + (diff / 2);
+				double rightQuartileLeft = (double) data.get(halfSize + (halfSize / 2) - 1);
+				double rightQuartileRight = (double) data.get(halfSize + (halfSize / 2));
+				diff = Math.abs(rightQuartileLeft - rightQuartileRight);
+				rightQuartile = Math.min(rightQuartileLeft, rightQuartileRight) + (diff / 2);
+			} else {
+				leftQuartile = (double)data.get((halfSize - 1) / 2);
+				rightQuartile = (double)data.get(halfSize + (halfSize - 1) / 2);
+			}
+		} else {
+			int halfSize = (size - 1) / 2;
+			if (halfSize % 2 == 0) {
+				double leftQuartileLeft = (double) data.get((halfSize / 2) - 1);
+				double leftQuartileRight = (double) data.get(halfSize / 2);
+				double diff = Math.abs(leftQuartileLeft - leftQuartileRight);
+				leftQuartile = Math.min(leftQuartileLeft, leftQuartileRight) + (diff / 2);
+				double rightQuartileLeft = (double) data.get(halfSize + (halfSize / 2));
+				double rightQuartileRight = (double) data.get(halfSize + (halfSize / 2) + 1);
+				diff = Math.abs(rightQuartileLeft - rightQuartileRight);
+				rightQuartile = Math.min(rightQuartileLeft, rightQuartileRight) + (diff / 2);
+			} else {
+				leftQuartile = (double)data.get((halfSize - 1) / 2);
+				rightQuartile = (double)data.get(halfSize + ((halfSize - 1) / 2) + 1);
+			}
+		}
+		return rightQuartile - leftQuartile;
 	}
 }
