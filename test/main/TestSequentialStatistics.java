@@ -21,16 +21,6 @@ public class TestSequentialStatistics {
 
 
 	@Test
-	public void testNullInputs() {
-		HashMap<String, Double> result = SequentialStatistics.calculate(null, false, false, false, false, false, false, false);
-		assertEquals(result.size(), 0);
-		
-		data.clear();
-		result = SequentialStatistics.calculate(data, false, false, false, false, false, false, false);
-		assertEquals(result.size(), 0);
-	}
-
-	@Test
 	public void testMean() {
 		data = Data.generateConstant(100, 10);
 		assertEquals(new Double(10.0), SequentialStatistics.calculateMean(data), 0.0);
