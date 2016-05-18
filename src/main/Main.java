@@ -30,6 +30,7 @@ public class Main {
 		timeTaken = timeEnd - timeStart;
 
 		System.out.println("time taken without median = " + timeTaken/1000.0 + " seconds");
+		//Average.average();
 	}
 
 }
