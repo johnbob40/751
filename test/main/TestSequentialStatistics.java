@@ -21,7 +21,7 @@ public class TestSequentialStatistics {
 
 	@Test
 	public void testNullInputs() {
-		assertNull(SequentialStatistics.calculate(null, false, false, false, false, false, false, false, false));
+		assertNull(SequentialStatistics.calculate(null, false, false, false, false, false, false, false));
 	}
 
 	@Test
@@ -184,7 +184,7 @@ public class TestSequentialStatistics {
 
 		data.add(-50.0);
 		
-		assertEquals(new Double(-1.395),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		assertEquals(new Double(-1.833),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
 
 		data.clear();
 		data.add(5.0);
@@ -196,7 +196,7 @@ public class TestSequentialStatistics {
 		data.add(15.0);
 		data.add(20.0);
 		data.add(25.0);
-		assertEquals(new Double(0.6776),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		assertEquals(new Double(0.8279),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
 		
 	}
 

@@ -10,7 +10,7 @@ public class SequentialStatistics {
 
 	public static String[] calculate(Collection<?> data, boolean mean,
 			boolean median, boolean max, boolean min, boolean stdDev,
-			boolean intQuartRange, boolean skewness, boolean corrCoef){
+			boolean intQuartRange, boolean skewness){
 		
 		if (data == null){
 			return null;
@@ -91,7 +91,7 @@ public class SequentialStatistics {
 
 		for (Object i : data){
 			meanSquare = ((Double) i) - mean;
-			deviations.add(Math.pow(meanSquare, 2));
+			deviations.add(Math.pow(meanSquare, 2.0));
 		}
 
 		return Math.sqrt(calculateMean(deviations));
