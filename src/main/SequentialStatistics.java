@@ -40,6 +40,12 @@ public class SequentialStatistics {
 			if (intQuartRange) {
 				sortedData = sequentialSort(inputData);
 				results.put("interquartile range", calculateQuartileRange(sortedData));
+				if (max){
+					results.put("max", calculateMaxSorted(sortedData));
+				}
+				if (min){
+					results.put("min",calculateMinSorted(sortedData));
+				}
 			}
 			if (max){
 				results.put("max", calculateMaxUnsorted(inputData));
