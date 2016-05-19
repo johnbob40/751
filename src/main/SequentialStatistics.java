@@ -18,7 +18,7 @@ public class SequentialStatistics {
 		if (inputData == null || inputData.size() == 0){
 			return results;
 		}
-		
+
 		List<?> sortedData;
 
 		if (mean){
@@ -80,7 +80,7 @@ public class SequentialStatistics {
 					results.put("skewness", calculateSkewWithoutMeanWithoutStdDev(inputData));
 				}
 			}
-				
+
 		}
 		return results;
 	}
@@ -130,7 +130,7 @@ public class SequentialStatistics {
 		}	
 		return min;
 	}
-	
+
 	public static Double calculateMinSorted(Collection<?> data) {
 		Iterator<?> it = data.iterator();
 		return (Double) it.next();
@@ -243,11 +243,11 @@ public class SequentialStatistics {
 			return (double) data.get((size - 1) / 2);
 		}
 	}
-	
+
 	public static List<?> sort(Collection<?> data){
 		return sequentialSort(data);
 	}
-	
+
 	public static Double calculateQuartileRange(List<?> data) {
 		double leftQuartile;
 		double rightQuartile;

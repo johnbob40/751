@@ -8,11 +8,6 @@ import org.junit.Test;
 public class TestParallelStatistics {
 	
 	@Test
-	public void testNullInputs() {
-		assertNull(ParallelStatistics.calculate(null, false, false, false, false, false, false, false, false));
-	}
-
-	@Test
 	public void testMean() {
 		assertEquals(1, 1);
 	}
