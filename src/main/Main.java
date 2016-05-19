@@ -1,12 +1,13 @@
 package main;
 
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ExecutionException, InterruptedException {
 		// TODO Auto-generated method stub
-		System.out.println("Creating List");
+		/*System.out.println("Creating List");
 		Collection<?> data = Data.generateReverse(50000000);
 
 		long timeStart = System.currentTimeMillis();
@@ -29,8 +30,16 @@ public class Main {
 
 		timeTaken = timeEnd - timeStart;
 
-		System.out.println("time taken without median = " + timeTaken/1000.0 + " seconds");
+		System.out.println("time taken without median = " + timeTaken/1000.0 + " seconds");*/
 		//Average.average();
+		
+		
+		/*
+		 * Create new list and start process (PARCutils-1.1.0.jar needs to be on build path)
+		 */
+		int size = 5000000;
+		Collection<Double> elements = Data.generateRandomList(size);
+		new Average1().compute(elements, size);
 	}
 
 }

@@ -38,8 +38,8 @@ public class Data {
 		return data;
 	}
 	
-	public static List<Double> generateRandomList(int length) {
-		List<Double> data = new ArrayList<Double>(length);
+	public static Collection<Double> generateRandomList(int length) {
+		Collection<Double> data = new ArrayList<Double>(length);
 		Random r = new Random();
 		for (int i = 0; i < length; i++) {
 			data.add(r.nextDouble() * 1000);
