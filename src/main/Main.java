@@ -2,6 +2,7 @@ package main;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 import java.util.List;
 
 public class Main {
@@ -17,9 +18,17 @@ public class Main {
 		meh(dummyData);
 		System.out.println(dummyData.get(0));
 		 */
-		timeSequential(data);
 		
+//		timeSequential(data);
 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Creating List");
+		Collection<?> data = Data.generateReverse(50000000);
+
+		int size = 5000000;
+		Collection<Double> elements = Data.generateRandomList(size);
+		new Average1().compute(elements, size);
 	}
 	
 	private static void timeSequential(Collection<?> data){
@@ -44,6 +53,11 @@ public class Main {
 		timeTaken = timeEnd - timeStart;
 
 		System.out.println("time taken without median = " + timeTaken/1000.0 + " seconds");
+		
+		/*
+		 * Create new list and start process (PARCutils-1.1.0.jar needs to be on build path)
+		 */
+
 	}
 
 	private static void meh(List<Double> data){
