@@ -1,6 +1,8 @@
 package main;
 
 import main.SequentialStatistics;
+import util.Data;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;

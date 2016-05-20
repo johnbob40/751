@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import main.SequentialStatistics;
+import util.Data;
 
 public class TestSequentialCalculate {
 	private HashMap<String, Double> results;

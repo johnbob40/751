@@ -4,8 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.Collection;
 
-import main.Data;
 import org.junit.Test;
+
+import util.Data;
 
 public class TestData {
 

@@ -7,6 +7,9 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import parallel.ParallelStatistics;
+import util.Data;
+
 public class TestParallelCalculate {
 	private HashMap<String, Double> results;
 	private Collection<Double> data;

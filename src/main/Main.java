@@ -1,27 +1,32 @@
 package main;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
-import java.util.List;
+
+import parallel.Average;
+import util.Data;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Collection<?> data; 
 		System.out.println("Creating List");
-		int size = 5000000;
+		int size = 100000000;
 		data= Data.generateRandomList(size);
-
+		System.out.println("List created");
 		
-		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 //		timeSequential(data);
 
 
 		try {
-			new Average1().compute(data, size);
+			new Average().compute(data);
 		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
