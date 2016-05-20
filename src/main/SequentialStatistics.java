@@ -228,6 +228,7 @@ public class SequentialStatistics {
 		while (it.hasNext()) {
 			listToSort.add((Double)it.next());
 		}
+		
 		Collections.sort(listToSort); // Using java native sort function
 		return listToSort;
 	}
