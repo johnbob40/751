@@ -3,25 +3,22 @@ package main;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
-import parallel.Average;
-import parallel.Max;
-import parallel.Min;
+import parallel.*;
 import util.Data;
 
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class Main {
 
 	public static void main(String[] args) {
 		Collection<?> data; 
 		System.out.println("Creating List");
-		int size = 1000000;
-		data= Data.generate(size);
+		int size = 100000000;
+		data= Data.generateReverse(size);
 		System.out.println("List created");
 		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 //		timeSequential(data);

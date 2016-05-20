@@ -1,5 +1,9 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import parallel.Mean;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 
@@ -24,31 +28,31 @@ public class WorkerThread extends Thread {
 		switch (calculationType){
 		case MEAN:
 			calculateMean();
-		break;
+			break;
 
 		case MEDIAN:
 			calculateMedian();
-		break;
+			break;
 
 		case MAX:
 			calculateMax();
-		break;
+			break;
 
 		case MIN:
 			calculateMin();
-		break;
+			break;
 
 		case STDDEV:
 			calculateStdDev();
-		break;
+			break;
 
 		case INTERQUARTILERANGE:
 			calculateInterQuartileRange();
-		break;
+			break;
 
 		case SKEWNESS:
 			calculateSkewness();
-		break;
+			break;
 
 		default:
 			break;
@@ -72,8 +76,18 @@ public class WorkerThread extends Thread {
 
 
 	private void calculateStdDev() {
-		// TODO Auto-generated method stub
+		/*
+		double mean = Mean.compute(data);
+		double meanSquare = 0;
+		Collection<Double> deviations = new ArrayList<Double>();
+		
+		while (pi.hasNext()){
+			meanSquare = ((Double)pi.next() ) - mean;
+			deviations.add(Math.pow(meanSquare, 2));
+		}
 
+		localSum.set(Math.sqrt(calculateMean(deviations)));
+*/
 	}
 
 
@@ -94,12 +108,9 @@ public class WorkerThread extends Thread {
 		//add local min to reduction agent
 		localSum.set(min);
 	}
-
-
-
 	private void calculateMax() {
 		Double max = new Double(0);
-		
+
 		if (pi.hasNext()){
 			max = (double) pi.next();
 		}
@@ -114,14 +125,10 @@ public class WorkerThread extends Thread {
 		//add local max to reduction agent
 		localSum.set(max);
 	}
-
-
-
 	private void calculateMedian() {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	private void calculateMean(){
 		double sum = 0;

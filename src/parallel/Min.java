@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
+import main.SequentialStatistics;
 import pu.RedLib.DoubleMinimum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
@@ -17,18 +18,7 @@ public class Min {
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
 		long startTime = System.currentTimeMillis();
-		Double temp, min;
-		Iterator<?> it = data.iterator();
-
-		//Getting the first element to use as the reference max
-		min = (Double) it.next();
-
-		while (it.hasNext()){	
-			temp = (Double) it.next();
-			if (temp < min){
-				min = temp;
-			}
-		}	
+		Double min = SequentialStatistics.calculateMinUnsorted(data);
 
 		long endTime = System.currentTimeMillis();
 		long duration = (endTime - startTime);

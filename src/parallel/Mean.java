@@ -1,29 +1,35 @@
 package parallel;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
-import main.SequentialStatistics;
-import pu.RedLib.DoubleMaximum;
+import pu.RedLib.DoubleSum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 import pu.pi.ParIteratorFactory;
 import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
-public class Max {
+public class Mean {
 
-	//public static double compute()
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
 		long startTime = System.currentTimeMillis();
-		Double max = SequentialStatistics.calculateMaxUnsorted(data);
+		double x = 0;
+		Double temp;
+		for(Object d : data){
+			temp = (Double) d;
+			x += temp;
+			//System.out.println(Thread.currentThread().getId());
+		}
 
+		double mean = x/data.size();
 		long endTime = System.currentTimeMillis();
 		long duration = (endTime - startTime);
 		System.out.println("sequential time = " + duration);
-		System.out.println("result is: " + max);
+		System.out.println("result is: " + mean);
+
+		Thread.sleep(2000);
 
 
 		startTime = System.currentTimeMillis();
@@ -33,14 +39,14 @@ public class Max {
 		 */
 		int threadCount = Runtime.getRuntime().availableProcessors();
 		ParIterator<?> pi = ParIteratorFactory.createParIterator(data, threadCount, ParIterator.Schedule.STATIC);
-		Reducible<Double> localMax = new Reducible<Double>();
+		Reducible<Double> localSum = new Reducible<Double>();
 		Thread[] threadPool = new WorkerThread[threadCount];
 
 		/*
 		 * start threads
 		 */
 		for (int i = 0; i < threadCount; i++) {
-			threadPool[i] = new WorkerThread(pi, localMax, CalculationType.MAX);
+			threadPool[i] = new WorkerThread(pi, localSum, CalculationType.MEAN);
 			threadPool[i].start();
 		}
 
@@ -58,13 +64,14 @@ public class Max {
 		/*
 		 * reduce threads 
 		 */
-		double finalMax = localMax.reduce(new DoubleMaximum());
+		double finalAverage = localSum.reduce(new DoubleSum());
 
+		mean = finalAverage/data.size();
 		endTime = System.currentTimeMillis();
 		duration = (endTime - startTime);
 		System.out.println("paralel duration = " + duration);
-		System.out.println("parallel result is: " + finalMax);
-		return finalMax;
+		System.out.println("parallel result is: " + mean);
+		return finalAverage;
 	}
 
 }
