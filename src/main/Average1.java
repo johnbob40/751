@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 
 import pu.RedLib.DoubleSum;
 import pu.RedLib.Reducible;
@@ -12,12 +13,14 @@ public class Average1 {
 	
 	//public static double compute()
 
-	public void compute(Collection<Double> elements, int size)throws InterruptedException{
+	public void compute(Collection<?> data, int size)throws InterruptedException, ExecutionException{
 		//Collection<Double> elements = Data.generateRandomList(size);
 		long startTime = System.currentTimeMillis();
 		double x = 0;
-		for(Double d : elements){
-			x += d;
+		Double temp;
+		for(Object d : data){
+			temp = (Double) d;
+			x += temp;
 			//System.out.println(Thread.currentThread().getId());
 		}
 
@@ -36,7 +39,7 @@ public class Average1 {
 		 * create parallel iterator, reduction agent and thread pool
 		 */
 		int threadCount = Runtime.getRuntime().availableProcessors();
-		ParIterator<Double> pi = ParIteratorFactory.createParIterator(elements, threadCount, ParIterator.Schedule.STATIC);
+		ParIterator<?> pi = ParIteratorFactory.createParIterator(data, threadCount, ParIterator.Schedule.STATIC);
 		Reducible<Double> localSum = new Reducible<Double>();
 		Thread[] threadPool = new WorkerThread[threadCount];
 		

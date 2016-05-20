@@ -10,25 +10,20 @@ public class Main {
 	public static void main(String[] args) {
 		Collection<?> data; 
 		System.out.println("Creating List");
-		data = Data.generateReverse(100000000);
+		int size = 5000000;
+		data= Data.generateRandomList(size);
+
 		
-		/*
-		List<Double> dummyData = (List<Double>) Data.generateReverse(5);
-		System.out.println(dummyData.get(0));
-		meh(dummyData);
-		System.out.println(dummyData.get(0));
-		 */
 		
 //		timeSequential(data);
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Creating List");
-		Collection<?> data = Data.generateReverse(50000000);
 
-		int size = 5000000;
-		Collection<Double> elements = Data.generateRandomList(size);
-		new Average1().compute(elements, size);
+		try {
+			new Average1().compute(data, size);
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static void timeSequential(Collection<?> data){
@@ -58,11 +53,5 @@ public class Main {
 		 * Create new list and start process (PARCutils-1.1.0.jar needs to be on build path)
 		 */
 
-	}
-
-	private static void meh(List<Double> data){
-		Double temp = data.get(0);
-		data.set(0, data.get(data.size() - 1));
-		data.set(data.size() - 1, temp);
 	}
 }
