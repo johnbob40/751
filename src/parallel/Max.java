@@ -1,38 +1,44 @@
 package parallel;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
-import pu.RedLib.DoubleSum;
+import pu.RedLib.DoubleMaximum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 import pu.pi.ParIteratorFactory;
 import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
-public class Average {
+public class Max {
 
 	//public static double compute()
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
 		long startTime = System.currentTimeMillis();
-		double x = 0;
 		Double temp;
-		for(Object d : data){
-			temp = (Double) d;
-			x += temp;
-			//System.out.println(Thread.currentThread().getId());
-		}
+		Iterator<?> it = data.iterator();
 
-		double mean = x/data.size();
+		//Getting the first element to use as the reference max
+		Double max = (Double) it.next();
+
+		while (it.hasNext()){	
+			temp = (Double) it.next();
+			if (temp > max){
+				max = temp;
+			}
+		}	
+
 		long endTime = System.currentTimeMillis();
 		long duration = (endTime - startTime);
 		System.out.println("sequential time = " + duration);
-		System.out.println("result is: " + mean);
+		System.out.println("result is: " + max);
 
+/*
+		//TODO take out
 		Thread.sleep(2000);
-
+*/
 
 		startTime = System.currentTimeMillis();
 
@@ -41,14 +47,14 @@ public class Average {
 		 */
 		int threadCount = Runtime.getRuntime().availableProcessors();
 		ParIterator<?> pi = ParIteratorFactory.createParIterator(data, threadCount, ParIterator.Schedule.STATIC);
-		Reducible<Double> localSum = new Reducible<Double>();
+		Reducible<Double> localMax = new Reducible<Double>();
 		Thread[] threadPool = new WorkerThread[threadCount];
 
 		/*
 		 * start threads
 		 */
 		for (int i = 0; i < threadCount; i++) {
-			threadPool[i] = new WorkerThread(pi, localSum, CalculationType.MEAN);
+			threadPool[i] = new WorkerThread(pi, localMax, CalculationType.MAX);
 			threadPool[i].start();
 		}
 
@@ -66,14 +72,13 @@ public class Average {
 		/*
 		 * reduce threads 
 		 */
-		double finalAverage = localSum.reduce(new DoubleSum());
+		double finalMax = localMax.reduce(new DoubleMaximum());
 
-		mean = finalAverage/data.size();
 		endTime = System.currentTimeMillis();
 		duration = (endTime - startTime);
 		System.out.println("paralel duration = " + duration);
-		System.out.println("parallel result is: " + mean);
-		return finalAverage;
+		System.out.println("parallel result is: " + finalMax);
+		return finalMax;
 	}
 
 }

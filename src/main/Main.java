@@ -4,15 +4,18 @@ import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
 import parallel.Average;
+import parallel.Max;
+import parallel.Min;
 import util.Data;
 
+@SuppressWarnings("unused")
 public class Main {
 
 	public static void main(String[] args) {
 		Collection<?> data; 
 		System.out.println("Creating List");
-		int size = 100000000;
-		data= Data.generateRandomList(size);
+		int size = 1000000;
+		data= Data.generate(size);
 		System.out.println("List created");
 		
 		try {
@@ -25,7 +28,7 @@ public class Main {
 
 
 		try {
-			new Average().compute(data);
+			Min.compute(data);
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
