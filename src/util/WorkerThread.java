@@ -1,27 +1,31 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import parallel.Mean;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 
 public class WorkerThread extends Thread {
 
-	public enum CalculationType{MEAN, MEDIAN, MAX, MIN, STDDEV, INTERQUARTILERANGE, SKEWNESS}
+	public enum CalculationType{MEAN, MEDIAN, MAX, MIN, STDDEV, INTERQUARTILERANGE, SKEWNESSNUM, SKEWNESSDENOM}
 	private ParIterator<?> pi = null;
 	private Reducible<Double> localSum = null;
 	private CalculationType calculationType;
+	private double mean = 0;
 
-	public WorkerThread(ParIterator<?> pi2, Reducible<Double> localSum, CalculationType mean) {
+	public WorkerThread(ParIterator<?> pi, Reducible<Double> localSum, CalculationType type) {
 		//this.id = id;
-		this.pi = pi2;
+		this.pi = pi;
 		this.localSum = localSum;
-		this.calculationType = mean;
+		this.calculationType = type;
 	}
 
-
+	public WorkerThread(ParIterator<?> pi, Reducible<Double> localSum, CalculationType type, double mean) {
+		//this.id = id;
+		this.pi = pi;
+		this.localSum = localSum;
+		this.calculationType = type;
+		this.mean = mean;
+		
+	}
 
 	public void run() {
 		//long startTime = System.currentTimeMillis();
@@ -50,10 +54,13 @@ public class WorkerThread extends Thread {
 			calculateInterQuartileRange();
 			break;
 
-		case SKEWNESS:
-			calculateSkewness();
+		case SKEWNESSDENOM:
+			calculateSkewnessDenom();
 			break;
 
+		case SKEWNESSNUM:
+			calculateSkewnessNum();
+			break;
 		default:
 			break;
 		}
@@ -68,26 +75,57 @@ public class WorkerThread extends Thread {
 
 
 
-	private void calculateSkewness() {
-		// TODO Auto-generated method stub
+	private void calculateSkewnessNum() {
+		double mean = this.mean;
+		double meanSquare = 0;
+		double deviations = 0;
+		
+		while (pi.hasNext()){
+			meanSquare = 0;
+			meanSquare = (Double)pi.next() - mean;
+			meanSquare = Math.pow(meanSquare, 3.00);
+			deviations += meanSquare;
+		}
+
+		//deviations = Math.pow(deviations, 3.00);
+		//deviations = Math.sqrt(deviations);
+		
+		localSum.set(deviations);
 
 	}
 
+	private void calculateSkewnessDenom() {
+		double mean = this.mean;
+		double meanSquare = 0;
+		double deviations = 0;
+		
+		while (pi.hasNext()){
+			meanSquare = 0;
+			meanSquare = (Double)pi.next() - mean;
+			meanSquare = Math.pow(meanSquare, 3.000);
+			deviations += meanSquare;
+		}
+
+		localSum.set(deviations);
+	}
 
 
 	private void calculateStdDev() {
-		/*
-		double mean = Mean.compute(data);
+		
+		//double mean = Mean.compute(data);
+		double mean = this.mean;
 		double meanSquare = 0;
-		Collection<Double> deviations = new ArrayList<Double>();
+		double deviations = 0;
 		
 		while (pi.hasNext()){
-			meanSquare = ((Double)pi.next() ) - mean;
-			deviations.add(Math.pow(meanSquare, 2));
+			meanSquare = 0;
+			meanSquare = (Double)pi.next() - mean;
+			meanSquare = Math.pow(meanSquare, 2.000);
+			deviations += meanSquare;
 		}
 
-		localSum.set(Math.sqrt(calculateMean(deviations)));
-*/
+		localSum.set(deviations);
+
 	}
 
 

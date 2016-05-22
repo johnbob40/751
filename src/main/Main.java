@@ -12,8 +12,8 @@ public class Main {
 	public static void main(String[] args) {
 		Collection<?> data; 
 		System.out.println("Creating List");
-		int size = 100000000;
-		data= Data.generateReverse(size);
+		int size = 5000000;
+		data= Data.generateRandomList(size);
 		System.out.println("List created");
 		
 		try {
@@ -25,7 +25,7 @@ public class Main {
 
 
 		try {
-			Min.compute(data);
+			Skewness.compute(data);
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}

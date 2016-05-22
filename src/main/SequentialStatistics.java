@@ -86,8 +86,8 @@ public class SequentialStatistics {
 	}
 
 	public static Double calculateMean(Collection<?> data){
-		Double sum = new Double(0);
-		Double value = new Double(0);
+		Double sum = 0.0;
+		Double value = 0.0;
 
 		for (Object i : data){
 			value = (double) i;
@@ -139,12 +139,13 @@ public class SequentialStatistics {
 	public static Double calculateStdDevWithoutMean(Collection<?> data){
 		double mean = calculateMean(data);
 		double meanSquare = 0;
-		Collection<Double> deviations = new ArrayList<Double>();
+		double deviations = 0;
 		for (Object i : data){
 			meanSquare = ((Double)i ) - mean;
-			deviations.add(Math.pow(meanSquare, 2));
+			deviations += (Math.pow(meanSquare, 2.000));
 		}
-		return Math.sqrt(calculateMean(deviations));
+		deviations = deviations/data.size();
+		return Math.sqrt(deviations);
 	}
 
 	public static Double calculateStdDevWithMean(Collection<?> data, Double mean){

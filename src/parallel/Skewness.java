@@ -11,14 +11,21 @@ import pu.pi.ParIteratorFactory;
 import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
-public class StdDev {
-
+public class Skewness {
 	private static long startTime;
 	private static long endTime;
 	private static long duration;
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
 
+		
+		startTime = System.currentTimeMillis();
+		Double stdDev = SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data);
+
+		endTime = System.currentTimeMillis();
+		duration = (endTime - startTime);
+		System.out.println("Skew sequential time = " + duration);
+		System.out.println("Skew result is: " + stdDev);
 
 		startTime = System.currentTimeMillis();
 		if(Values.mean == -99999993){
@@ -31,14 +38,14 @@ public class StdDev {
 		int threadCount = Runtime.getRuntime().availableProcessors();
 		//int threadCount = 1;
 		ParIterator<?> pi = ParIteratorFactory.createParIterator(data, threadCount, ParIterator.Schedule.STATIC);
-		Reducible<Double> localSum = new Reducible<Double>();
+		Reducible<Double> localNum = new Reducible<Double>();
 		Thread[] threadPool = new WorkerThread[threadCount];
 
 		/*
 		 * start threads
 		 */
 		for (int i = 0; i < threadCount; i++) {
-			threadPool[i] = new WorkerThread(pi, localSum, CalculationType.STDDEV, Values.mean);
+			threadPool[i] = new WorkerThread(pi, localNum, CalculationType.SKEWNESSNUM, Values.mean);
 			threadPool[i].start();
 		}
 
@@ -51,43 +58,41 @@ public class StdDev {
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}
+		
+		}
+		double finalNum = localNum.reduce(new DoubleSum());
+		System.out.println(finalNum);
+
+		
+		if(Values.stdDev == -99999993){
+			
+			
+			double finalDenom = StdDev.compute(data);
+			finalDenom = Math.pow(finalDenom, 3);
+			double finalSkewness = finalNum/(finalDenom*(data.size()));
+			
+			Values.skewness = finalSkewness;
+			
+			endTime = System.currentTimeMillis();
+			duration = (endTime - startTime);
+			System.out.println("Skew parallel duration = " + duration);
+			System.out.println("Skew parallel result is: " + finalSkewness);
+			return finalSkewness;
+
 		}
 
 		/*
 		 * reduce threads 
 		 */
-		double finalDev = localSum.reduce(new DoubleSum());
 
-		finalDev = finalDev/data.size();
-		finalDev = Math.sqrt(finalDev);
+		double finalSkewness = finalNum/(data.size()*Values.stdDev);
+
 		endTime = System.currentTimeMillis();
 		duration = (endTime - startTime);
 		System.out.println("stddev parallel duration = " + duration);
-		System.out.println("stddev parallel result is: " + finalDev);
-
-
-
-
-
-
-		startTime = System.currentTimeMillis();
-		Double stdDev = SequentialStatistics.calculateStdDevWithoutMean(data);
-
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("stddev sequential time = " + duration);
-		System.out.println("stddev result is: " + stdDev);
-
-		/*
-		//TODO take out
-		Thread.sleep(2000);
-		 */
-
-
-
-
-		Values.stdDev = stdDev;
-		return stdDev;
+		System.out.println("stddev parallel result is: " + finalSkewness);
+		
+		Values.skewness = finalSkewness;
+		return finalSkewness;
 	}
-
 }

@@ -64,6 +64,9 @@ public class Max {
 		duration = (endTime - startTime);
 		System.out.println("paralel duration = " + duration);
 		System.out.println("parallel result is: " + finalMax);
+		
+		
+		Values.max = finalMax;
 		return finalMax;
 	}
 

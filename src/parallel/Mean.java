@@ -12,9 +12,13 @@ import util.WorkerThread.CalculationType;
 
 public class Mean {
 
+	private static long startTime;
+	private static long endTime;
+	private static long duration;
+	private static double mean;
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
-		long startTime = System.currentTimeMillis();
+		/*startTime = System.currentTimeMillis();
 		double x = 0;
 		Double temp;
 		for(Object d : data){
@@ -24,12 +28,12 @@ public class Mean {
 		}
 
 		double mean = x/data.size();
-		long endTime = System.currentTimeMillis();
-		long duration = (endTime - startTime);
-		System.out.println("sequential time = " + duration);
-		System.out.println("result is: " + mean);
+		endTime = System.currentTimeMillis();
+		duration = (endTime - startTime);
+		System.out.println("mean sequential time = " + duration);
+		System.out.println("mean result is: " + mean);
 
-		Thread.sleep(2000);
+		//Thread.sleep(2000);*/
 
 
 		startTime = System.currentTimeMillis();
@@ -65,13 +69,13 @@ public class Mean {
 		 * reduce threads 
 		 */
 		double finalAverage = localSum.reduce(new DoubleSum());
-
+		mean = 0;
 		mean = finalAverage/data.size();
 		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("paralel duration = " + duration);
-		System.out.println("parallel result is: " + mean);
-		return finalAverage;
+		duration = endTime - startTime;
+		System.out.println("mean parallel duration = " + duration);
+		System.out.println("mean parallel result is: " + mean);
+		return mean;
 	}
 
 }

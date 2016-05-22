@@ -68,6 +68,7 @@ public class Min {
 		duration = (endTime - startTime);
 		System.out.println("paralel duration = " + duration);
 		System.out.println("parallel result is: " + finalMin);
+		Values.min = finalMin;
 		return finalMin;
 	}
 
