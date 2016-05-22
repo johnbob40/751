@@ -1,10 +1,13 @@
 package main;
 
 import main.SequentialStatistics;
+import util.Data;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,11 +21,6 @@ public class TestSequentialStatistics {
 		data = Data.generateConstant(10, 5);
 	}
 
-
-	@Test
-	public void testNullInputs() {
-		assertNull(SequentialStatistics.calculate(null, false, false, false, false, false, false, false, false));
-	}
 
 	@Test
 	public void testMean() {
@@ -173,18 +171,18 @@ public class TestSequentialStatistics {
 	}
 	@Test
 	public void testSkewWithoutMean(){
-		assertTrue(Double.isNaN(SequentialStatistics.calculateSkewWithoutMean(data)));
+		assertTrue(Double.isNaN(SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data)));
 		data.clear();
 		data.add(5.0);
 		data.add(10.0);
 		data.add(15.0);
 		data.add(20.0);
 		data.add(25.0);
-		assertEquals(new Double(0),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		assertEquals(new Double(0),SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data), 0.1);
 
 		data.add(-50.0);
 		
-		assertEquals(new Double(-1.395),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		assertEquals(new Double(-1.833),SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data), 0.1);
 
 		data.clear();
 		data.add(5.0);
@@ -196,7 +194,7 @@ public class TestSequentialStatistics {
 		data.add(15.0);
 		data.add(20.0);
 		data.add(25.0);
-		assertEquals(new Double(0.6776),SequentialStatistics.calculateSkewWithoutMean(data), 0.1);
+		assertEquals(new Double(0.8279),SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data), 0.1);
 		
 	}
 
@@ -228,9 +226,31 @@ public class TestSequentialStatistics {
 	
 	@Test
 	public void testMedian() {
-		Collection<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		List<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);
 		assertEquals(54.5, SequentialStatistics.calculateMedian(data), 0.0001);
+		
 		data = Data.generateConsecutiveList(11, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
 		assertEquals(55.0, SequentialStatistics.calculateMedian(data), 0.0001);
+	}
+	
+	@Test
+	public void testQuartileRange() {
+		List<Double> data = Data.generateConsecutiveList(10, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);
+		assertEquals(5.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(11, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(6.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(12, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(6.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
+		
+		data = Data.generateConsecutiveList(13, 50, 5);
+		data = SequentialStatistics.sequentialSort(data);		
+		assertEquals(7.0, SequentialStatistics.calculateQuartileRange(data), 0.0001);
 	}
 }

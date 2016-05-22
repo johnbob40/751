@@ -1,17 +1,13 @@
 package main;
 
-import main.ParallelStatistics;
 import static org.junit.Assert.*;
-import org.junit.Test; 
+import org.junit.Test;
+
+import parallel.ParallelStatistics; 
 
 
 public class TestParallelStatistics {
 	
-	@Test
-	public void testNullInputs() {
-		assertNull(ParallelStatistics.calculate(null, false, false, false, false, false, false, false, false));
-	}
-
 	@Test
 	public void testMean() {
 		assertEquals(1, 1);
