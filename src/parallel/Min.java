@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
-import main.SequentialStatistics;
 import pu.RedLib.DoubleMinimum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 import pu.pi.ParIteratorFactory;
+import sequential.SequentialStatistics;
 import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 

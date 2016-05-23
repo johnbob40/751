@@ -3,22 +3,19 @@ package parallel;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
-import main.SequentialStatistics;
 import pu.RedLib.DoubleSum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
 import pu.pi.ParIteratorFactory;
+import sequential.SequentialStatistics;
 import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
 public class Skewness {
-	private static long startTime;
-	private static long endTime;
-	private static long duration;
 
-	public static Double compute(Collection<?> data) throws InterruptedException, ExecutionException{
-		if(Values.mean.equals(null)){
-			double mean = Mean.compute(data);
+	public static Double compute(Collection<?> data){
+		if(Values.mean == null){
+			double mean = SequentialStatistics.calculateMean(data);
 			Values.mean = mean;
 		}
 		/*
@@ -52,7 +49,7 @@ public class Skewness {
 		double finalNum = localNum.reduce(new DoubleSum());
 		
 		if(Values.stdDev == null){
-			double finalDenom = StdDev.compute(data);
+			double finalDenom = SequentialStatistics.calculateStdDevWithMean(data, Values.mean);
 			finalDenom = Math.pow(finalDenom, 3);
 			double finalSkewness = finalNum/(finalDenom*(data.size()));
 			
@@ -65,7 +62,7 @@ public class Skewness {
 		 * reduce threads 
 		 */
 
-		double finalSkewness = finalNum/(data.size()*Values.stdDev);
+		double finalSkewness = finalNum/(data.size() * Values.stdDev);
 		Values.skewness = finalSkewness;
 		return finalSkewness;
 	}

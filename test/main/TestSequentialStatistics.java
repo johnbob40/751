@@ -1,6 +1,5 @@
 package main;
 
-import main.SequentialStatistics;
 import util.Data;
 
 import static org.junit.Assert.*;
@@ -11,7 +10,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test; 
+import org.junit.Test;
+
+import sequential.SequentialStatistics; 
 
 
 public class TestSequentialStatistics {

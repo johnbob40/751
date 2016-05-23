@@ -12,12 +12,12 @@ public class Sorting {
 		return array;
 	}
 	
-	public static void median(Collection<?> data){
+	public static Double median(Collection<?> data){
 		if(Values.sortedArray == null){
 			parallelSort(data);
 			
 		}
-		Median.compute();
+		return Median.compute();
 	}
 
 	public static Double iQR(Collection<?> data){

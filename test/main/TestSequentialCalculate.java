@@ -6,7 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.junit.Test;
-import main.SequentialStatistics;
+
+import sequential.SequentialStatistics;
 import util.Data;
 
 public class TestSequentialCalculate {

@@ -5,11 +5,11 @@ import pu.pi.ParIterator;
 
 public class WorkerThread extends Thread {
 
-	public enum CalculationType{MEAN, MEDIAN, MAX, MIN, STDDEV, INTERQUARTILERANGE, SKEWNESSNUM, SKEWNESSDENOM}
+	public static enum CalculationType{MEAN, MEDIAN, MAX, MIN, STDDEV, SKEWNESSNUM, SKEWNESSDENOM}
 	private ParIterator<?> pi = null;
 	private Reducible<Double> localSum = null;
 	private CalculationType calculationType;
-	private double mean = 0;
+	private Double mean = null;
 
 	public WorkerThread(ParIterator<?> pi, Reducible<Double> localSum, CalculationType type) {
 		//this.id = id;
@@ -50,10 +50,6 @@ public class WorkerThread extends Thread {
 			calculateStdDev();
 			break;
 
-		case INTERQUARTILERANGE:
-			calculateInterQuartileRange();
-			break;
-
 		case SKEWNESSDENOM:
 			calculateSkewnessDenom();
 			break;
@@ -67,13 +63,6 @@ public class WorkerThread extends Thread {
 
 
 	}
-
-	private void calculateInterQuartileRange() {
-		// TODO Auto-generated method stub
-
-	}
-
-
 
 	private void calculateSkewnessNum() {
 		double mean = this.mean;
@@ -127,8 +116,6 @@ public class WorkerThread extends Thread {
 		localSum.set(deviations);
 
 	}
-
-
 
 	private void calculateMin() {
 		Double min = new Double(0);
