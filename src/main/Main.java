@@ -13,6 +13,7 @@ public class Main {
 		Collection<?> data; 
 		System.out.println("Creating List");
 		int size = 5000000;
+//		data= Data.generateReverse(size);
 		data= Data.generateRandomList(size);
 		System.out.println("List created");
 		
@@ -24,11 +25,11 @@ public class Main {
 //		timeSequential(data);
 
 
-		try {
-			Skewness.compute(data);
+		Median.compute(data);
+		/*try {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	private static void timeSequential(Collection<?> data){

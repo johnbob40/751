@@ -48,7 +48,7 @@ public class Skewness {
 			threadPool[i] = new WorkerThread(pi, localNum, CalculationType.SKEWNESSNUM, Values.mean);
 			threadPool[i].start();
 		}
-
+		//Arrays.pa
 		/*
 		 * wait for threads
 		 */
