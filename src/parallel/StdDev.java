@@ -12,16 +12,8 @@ import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
 public class StdDev {
-
-	private static long startTime;
-	private static long endTime;
-	private static long duration;
-
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
-
-
-		startTime = System.currentTimeMillis();
-		if(Values.mean == -99999993){
+		if(Values.mean == null){
 			double mean = Mean.compute(data);
 			Values.mean = mean;
 		}
@@ -60,31 +52,8 @@ public class StdDev {
 
 		finalDev = finalDev/data.size();
 		finalDev = Math.sqrt(finalDev);
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("stddev parallel duration = " + duration);
-		System.out.println("stddev parallel result is: " + finalDev);
 
-
-
-
-
-
-		startTime = System.currentTimeMillis();
 		Double stdDev = SequentialStatistics.calculateStdDevWithoutMean(data);
-
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("stddev sequential time = " + duration);
-		System.out.println("stddev result is: " + stdDev);
-
-		/*
-		//TODO take out
-		Thread.sleep(2000);
-		 */
-
-
-
 
 		Values.stdDev = stdDev;
 		return stdDev;
