@@ -17,22 +17,22 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 		
-//		System.out.println("Calling top level calculate");
-//		System.out.println(inputData.size());
 		HashMap<String, Double> answers = new HashMap<String, Double>();
 
 		if (inputData == null || inputData.size() == 0){
 			//little bit of robustness
 			return answers;
 		}
+		if (inputData.size() <= 85000){
+			//not worth the overhead, doing it all sequentially
+			return SequentialStatistics.calculate(inputData, mean, median, max, min, stdDev, intQuartRange, skewness);
+		}
 
 		boolean sorted = false;
 		List<Double> sortedData = null;
 		if (median || intQuartRange){
 			//sort
-//			System.out.println("asdfgd  " + inputData.size());
 			sortedData = new ArrayList<>(Arrays.asList(Sorting.parallelSort(inputData)));
-			
 			Values.sortedArray = sortedData.toArray(new Double[sortedData.size()]);
 			sorted = true;
 		}

@@ -13,7 +13,7 @@ public class TestData {
 	@Test
 	public void testLength() {
 		int length = 100;
-		Collection<Double> data = Data.generate(length);
+		Collection<?> data = Data.generate(length);
 		assertEquals(length, data.size());
 		data = Data.generateConstant(length, 99);
 		assertEquals(length, data.size());

@@ -2,7 +2,6 @@ package parallel;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class Sorting {
 	

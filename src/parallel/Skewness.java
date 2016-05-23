@@ -1,7 +1,6 @@
 package parallel;
 
 import java.util.Collection;
-import java.util.concurrent.ExecutionException;
 
 import pu.RedLib.DoubleSum;
 import pu.RedLib.Reducible;

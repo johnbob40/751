@@ -68,19 +68,16 @@ public class WorkerThread extends Thread {
 		double mean = this.mean;
 		double meanSquare = 0;
 		double deviations = 0;
-
 		while (pi.hasNext()){
 			meanSquare = 0;
 			meanSquare = (Double)pi.next() - mean;
 			meanSquare = Math.pow(meanSquare, 3.00);
 			deviations += meanSquare;
 		}
-
 		//deviations = Math.pow(deviations, 3.00);
 		//deviations = Math.sqrt(deviations);
 
 		localSum.set(deviations);
-
 	}
 
 	private void calculateSkewnessDenom() {
