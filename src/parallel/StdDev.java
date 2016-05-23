@@ -3,7 +3,6 @@ package parallel;
 import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
-import main.SequentialStatistics;
 import pu.RedLib.DoubleSum;
 import pu.RedLib.Reducible;
 import pu.pi.ParIterator;
@@ -13,15 +12,8 @@ import util.WorkerThread.CalculationType;
 
 public class StdDev {
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
-<<<<<<< HEAD
-=======
-
-
-		startTime = System.currentTimeMillis();
->>>>>>> 44753e2a71c241828454e1803610764764f73546
 		if(Values.mean == null){
-			double mean = Mean.compute(data);
-			Values.mean = mean;
+			Values.mean = Mean.compute(data);
 		}
 		/*
 		 * create parallel iterator, reduction agent and thread pool
@@ -59,10 +51,9 @@ public class StdDev {
 		finalDev = finalDev/data.size();
 		finalDev = Math.sqrt(finalDev);
 
-		Double stdDev = SequentialStatistics.calculateStdDevWithoutMean(data);
 
-		Values.stdDev = stdDev;
-		return stdDev;
+		Values.stdDev = finalDev;
+		return finalDev;
 	}
 
 }

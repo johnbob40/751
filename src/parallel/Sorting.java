@@ -5,10 +5,11 @@ import java.util.Collection;
 
 public class Sorting {
 	
-	public static void parallelSort(Collection<?> data){
+	public static Double[] parallelSort(Collection<?> data){
 		Double[] array = (Double[]) data.toArray(new Double[data.size()]);
 		Arrays.parallelSort(array);
 		Values.sortedArray = array;
+		return array;
 	}
 	
 	public static void median(Collection<?> data){
@@ -19,11 +20,11 @@ public class Sorting {
 		Median.compute();
 	}
 
-	public static void iQR(Collection<?> data){
+	public static Double iQR(Collection<?> data){
 		if(Values.sortedArray == null){
 			parallelSort(data);
 			
 		}
-		IQR.compute();
+		return IQR.compute();
 	}
 }
