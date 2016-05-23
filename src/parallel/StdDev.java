@@ -13,6 +13,12 @@ import util.WorkerThread.CalculationType;
 
 public class StdDev {
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
+<<<<<<< HEAD
+=======
+
+
+		startTime = System.currentTimeMillis();
+>>>>>>> 44753e2a71c241828454e1803610764764f73546
 		if(Values.mean == null){
 			double mean = Mean.compute(data);
 			Values.mean = mean;

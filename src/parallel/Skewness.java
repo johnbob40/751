@@ -17,7 +17,7 @@ public class Skewness {
 	private static long duration;
 
 	public static Double compute(Collection<?> data) throws InterruptedException, ExecutionException{
-		if(Values.mean == null){
+		if(Values.mean.equals(null)){
 			double mean = Mean.compute(data);
 			Values.mean = mean;
 		}
