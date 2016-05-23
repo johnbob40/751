@@ -1,5 +1,6 @@
 package parallel;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -18,4 +19,6 @@ public class ParallelStatistics {
 
 		return null;
 	}
+	
+	
 }

@@ -25,7 +25,7 @@ public class Main {
 //		timeSequential(data);
 
 
-		Median.compute(data);
+		Sorting.iQR(data);
 		/*try {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();

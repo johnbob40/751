@@ -8,4 +8,5 @@ public class Values {
 	public static double min = -99999993;
 	public static double max = -99999993;
 	public static double IQR = -99999993;
+	public static Double[] sortedArray = null;
 }
