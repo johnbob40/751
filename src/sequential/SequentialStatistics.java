@@ -90,7 +90,7 @@ public class SequentialStatistics {
 		Double value = 0.0;
 
 		for (Object i : data){
-			value = (double) i;
+			value = (Double) i;
 			sum += value;
 		}
 		return sum/data.size();

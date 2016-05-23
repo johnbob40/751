@@ -121,7 +121,11 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 
-		Collection<?> data = Arrays.asList(inputData);
+		double[] castData = new double[inputData.length];
+		for (int i = 0; i < inputData.length; i++){
+			castData[i] = Double.valueOf(inputData[i]);
+		}
+		List<?> data = new ArrayList<>(Arrays.stream(castData).boxed().collect(Collectors.toList()));
 		return calculate(data, mean, median, max, min, stdDev, intQuartRange, skewness);
 
 	}
@@ -130,7 +134,11 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 
-		Collection<?> data = Arrays.asList(inputData);
+		double[] castData = new double[inputData.length];
+		for (int i = 0; i < inputData.length; i++){
+			castData[i] = Double.valueOf(inputData[i]);
+		}
+		List<?> data = new ArrayList<>(Arrays.stream(castData).boxed().collect(Collectors.toList()));
 		return calculate(data, mean, median, max, min, stdDev, intQuartRange, skewness);
 
 	}
@@ -139,7 +147,11 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 
-		Collection<?> data = Arrays.asList(inputData);
+		double[] castData = new double[inputData.length];
+		for (int i = 0; i < inputData.length; i++){
+			castData[i] = Double.valueOf(inputData[i]);
+		}
+		List<?> data = new ArrayList<>(Arrays.stream(castData).boxed().collect(Collectors.toList()));
 		return calculate(data, mean, median, max, min, stdDev, intQuartRange, skewness);
 
 	}
@@ -148,7 +160,11 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 
-		Collection<?> data = Arrays.asList(inputData);
+		double[] castData = new double[inputData.length];
+		for (int i = 0; i < inputData.length; i++){
+			castData[i] = Double.valueOf(inputData[i]);
+		}
+		List<?> data = new ArrayList<>(Arrays.stream(castData).boxed().collect(Collectors.toList()));
 		return calculate(data, mean, median, max, min, stdDev, intQuartRange, skewness);
 
 	}
