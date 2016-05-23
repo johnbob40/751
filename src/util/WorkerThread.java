@@ -24,7 +24,7 @@ public class WorkerThread extends Thread {
 		this.localSum = localSum;
 		this.calculationType = type;
 		this.mean = mean;
-		
+
 	}
 
 	public void run() {
@@ -68,7 +68,7 @@ public class WorkerThread extends Thread {
 		double mean = this.mean;
 		double meanSquare = 0;
 		double deviations = 0;
-		
+
 		while (pi.hasNext()){
 			meanSquare = 0;
 			meanSquare = (Double)pi.next() - mean;
@@ -78,7 +78,7 @@ public class WorkerThread extends Thread {
 
 		//deviations = Math.pow(deviations, 3.00);
 		//deviations = Math.sqrt(deviations);
-		
+
 		localSum.set(deviations);
 
 	}
@@ -87,7 +87,7 @@ public class WorkerThread extends Thread {
 		double mean = this.mean;
 		double meanSquare = 0;
 		double deviations = 0;
-		
+
 		while (pi.hasNext()){
 			meanSquare = 0;
 			meanSquare = (Double)pi.next() - mean;
@@ -100,12 +100,12 @@ public class WorkerThread extends Thread {
 
 
 	private void calculateStdDev() {
-		
+
 		//double mean = Mean.compute(data);
 		double mean = this.mean;
 		double meanSquare = 0;
 		double deviations = 0;
-		
+
 		while (pi.hasNext()){
 			meanSquare = 0;
 			meanSquare = (Double)pi.next() - mean;

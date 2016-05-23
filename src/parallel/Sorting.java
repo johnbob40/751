@@ -2,11 +2,13 @@ package parallel;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class Sorting {
 	
 	public static Double[] parallelSort(Collection<?> data){
-		Double[] array = (Double[]) data.toArray(new Double[data.size()]);
+		Double[] array = data.toArray(new Double[data.size()]);
+
 		Arrays.parallelSort(array);
 		Values.sortedArray = array;
 		return array;
