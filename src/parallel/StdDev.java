@@ -21,7 +21,7 @@ public class StdDev {
 
 
 		startTime = System.currentTimeMillis();
-		if(Values.mean == -99999993){
+		if(Values.mean == null){
 			double mean = Mean.compute(data);
 			Values.mean = mean;
 		}

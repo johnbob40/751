@@ -1,12 +1,14 @@
 package parallel;
 
 public class Values {
-	public static double median = -99999993;
-	public static double mean = -99999993;
-	public static double stdDev = -99999993;
-	public static double skewness = -99999993;
-	public static double min = -99999993;
-	public static double max = -99999993;
-	public static double IQR = -99999993;
+
+	public static Double median = null;
+	public static Double mean = null;
+	public static Double stdDev = null;
+	public static Double skewness = null;
+	public static Double min = null;
+	public static Double max = null;
+	public static Double IQR = null;
 	public static Double[] sortedArray = null;
+
 }

@@ -1,15 +1,12 @@
 package parallel;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 public class Median {
 
-	private static long startTime;
-	private static long endTime;
-	private static long duration;
-
 	public static Double compute(){
-		
-		startTime = System.currentTimeMillis();
-		
+
 		int size = Values.sortedArray.length;
 		double median = 0.0;
 		if (size % 2 == 0) {
@@ -20,18 +17,9 @@ public class Median {
 		} else {
 			median = (double) Values.sortedArray[size - 1 / 2];
 		}
-		endTime = System.currentTimeMillis();
-		duration = endTime - startTime;
-		System.out.println("parallel duration = " + duration);
-		System.out.println("parallel median = "+median);
-		Values.median = median;
-		
-		//startTime = System.currentTimeMillis();
 
-		//System.out.println(SequentialStatistics.calculateMedian(SequentialStatistics.sequentialSort(data)));
-		//endTime = System.currentTimeMillis();
-		//duration = endTime - startTime;
-		//System.out.println("sequential duration = " + duration);
+
+		Values.median = median;
 		return median;
 	}
 }

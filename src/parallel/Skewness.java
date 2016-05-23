@@ -16,19 +16,8 @@ public class Skewness {
 	private static long endTime;
 	private static long duration;
 
-	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
-
-		
-		startTime = System.currentTimeMillis();
-		Double stdDev = SequentialStatistics.calculateSkewWithoutMeanWithoutStdDev(data);
-
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("Skew sequential time = " + duration);
-		System.out.println("Skew result is: " + stdDev);
-
-		startTime = System.currentTimeMillis();
-		if(Values.mean == -99999993){
+	public static Double compute(Collection<?> data) throws InterruptedException, ExecutionException{
+		if(Values.mean.equals(null)){
 			double mean = Mean.compute(data);
 			Values.mean = mean;
 		}
@@ -61,22 +50,13 @@ public class Skewness {
 		
 		}
 		double finalNum = localNum.reduce(new DoubleSum());
-		System.out.println(finalNum);
-
 		
-		if(Values.stdDev == -99999993){
-			
-			
+		if(Values.stdDev == null){
 			double finalDenom = StdDev.compute(data);
 			finalDenom = Math.pow(finalDenom, 3);
 			double finalSkewness = finalNum/(finalDenom*(data.size()));
 			
 			Values.skewness = finalSkewness;
-			
-			endTime = System.currentTimeMillis();
-			duration = (endTime - startTime);
-			System.out.println("Skew parallel duration = " + duration);
-			System.out.println("Skew parallel result is: " + finalSkewness);
 			return finalSkewness;
 
 		}
@@ -86,12 +66,6 @@ public class Skewness {
 		 */
 
 		double finalSkewness = finalNum/(data.size()*Values.stdDev);
-
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("stddev parallel duration = " + duration);
-		System.out.println("stddev parallel result is: " + finalSkewness);
-		
 		Values.skewness = finalSkewness;
 		return finalSkewness;
 	}

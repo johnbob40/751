@@ -11,33 +11,9 @@ import util.WorkerThread;
 import util.WorkerThread.CalculationType;
 
 public class Mean {
-
-	private static long startTime;
-	private static long endTime;
-	private static long duration;
 	private static double mean;
 
 	public static Double compute(Collection<?> data)throws InterruptedException, ExecutionException{
-		/*startTime = System.currentTimeMillis();
-		double x = 0;
-		Double temp;
-		for(Object d : data){
-			temp = (Double) d;
-			x += temp;
-			//System.out.println(Thread.currentThread().getId());
-		}
-
-		double mean = x/data.size();
-		endTime = System.currentTimeMillis();
-		duration = (endTime - startTime);
-		System.out.println("mean sequential time = " + duration);
-		System.out.println("mean result is: " + mean);
-
-		//Thread.sleep(2000);*/
-
-
-		startTime = System.currentTimeMillis();
-
 		/*
 		 * create parallel iterator, reduction agent and thread pool
 		 */
@@ -68,13 +44,8 @@ public class Mean {
 		/*
 		 * reduce threads 
 		 */
-		double finalAverage = localSum.reduce(new DoubleSum());
-		mean = 0;
-		mean = finalAverage/data.size();
-		endTime = System.currentTimeMillis();
-		duration = endTime - startTime;
-		System.out.println("mean parallel duration = " + duration);
-		System.out.println("mean parallel result is: " + mean);
+		double finalSum = localSum.reduce(new DoubleSum());
+		mean = finalSum/data.size();
 		return mean;
 	}
 
