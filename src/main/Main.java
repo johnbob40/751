@@ -25,11 +25,11 @@ public class Main {
 //		timeSequential(data);
 
 
-		Median.compute(data);
-		/*try {
+		try {
+		Mean.compute(data);
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	private static void timeSequential(Collection<?> data){
