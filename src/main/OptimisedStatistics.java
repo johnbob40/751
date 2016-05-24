@@ -236,7 +236,6 @@ public class OptimisedStatistics {
 			boolean median, boolean max, boolean min, boolean stdDev,
 			boolean intQuartRange, boolean skewness){
 		Collection<?> data = Arrays.asList(inputData.toArray());
-		System.out.println(data);
 		return calculate(data, mean, median, max, min, stdDev, intQuartRange, skewness);
 
 	}

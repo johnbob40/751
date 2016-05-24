@@ -7,36 +7,39 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import parallel.ParallelStatistics;
-import sequential.SequentialStatistics;
 import util.Data;
 
-public class TestParallelCalculate {
+public class TestOptimisedCalculate {
 	private HashMap<String, Double> results;
 	private Collection<Double> data;
 
-
-	public TestParallelCalculate(){
+	
+	public TestOptimisedCalculate(){
 		results = new HashMap<String, Double>();
 		data = Data.generateConstant(10, 5);
 	}
 
 	@Test
 	public void testNullInputs() {
-		results = ParallelStatistics.calculate(null, true, true, true, true, true, true, true);
+		data = null;
+		results = OptimisedStatistics.calculate(data, false, false, false, false, false, false, false);
 		assertEquals(results.size(), 0);
 	}
 	
 	@Test
 	public void testCalculateWithNoData(){
 		data.clear();
-		results = ParallelStatistics.calculate(data, true, true, true, true, true, true, true);
+		results = OptimisedStatistics.calculate(data, false, false, false, false, false, false, false);
 		assertEquals(results.size(), 0);
 	}
-	
+	@Test
+	public void testCalculateNothing(){
+		results = OptimisedStatistics.calculate(data, false, false, false, false, false, false, false);
+		assertEquals(results.size(), 0);
+	}
 	@Test
 	public void testCalculatingAll() {
-		results = ParallelStatistics.calculate(data, true, true, true, true, true, true, true);
+		results = OptimisedStatistics.calculate(data, true, true, true, true, true, true, true);
 		assertEquals(results.get("mean"), 5.0, 0.0);
 		assertEquals(results.get("median"), 5.0, 0.0);
 		assertEquals(results.get("max"), 5.0, 0.0);
@@ -48,7 +51,7 @@ public class TestParallelCalculate {
 	@Test
 	public void testCalculatingAllButMean() {
 		data = Data.generate(100);
-		results = ParallelStatistics.calculate(data, false, true, true, true, true, true, true);
+		results = OptimisedStatistics.calculate(data, false, true, true, true, true, true, true);
 		assertNull(results.get("mean"));
 		assertEquals(results.get("max"), 99.0, 0.0);
 		assertEquals(results.get("median"), 49.5, 0.0);
@@ -61,7 +64,7 @@ public class TestParallelCalculate {
 	public void testDataIntegrity(){
 		data = Data.generateReverse(5);
 		Collection<Double> data1 = Data.generateReverse(5);
-		ParallelStatistics.calculate(data, true, true, false, false, false, false, false);
+		OptimisedStatistics.calculate(data, true, true, true, true, true, true, true);
 		assertEquals(data, data1);
 	}
 }

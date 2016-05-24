@@ -20,7 +20,6 @@ public class TestData {
 		data = Data.generateRandomList(length);
 		assertEquals(length, data.size());
 		data = Data.generateConsecutiveList(length, 20, 15);
-		System.out.println(data);
 		assertEquals(length, data.size());
 	}
 	
