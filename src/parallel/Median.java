@@ -12,7 +12,7 @@ public class Median {
 			double diff = Math.abs(medianLeft - medianRight);
 			median =  Math.min(medianLeft, medianRight) + (diff / 2);
 		} else {
-			median = (double) Values.sortedArray[size - 1 / 2];
+			median = (double) Values.sortedArray[(size - 1 )/ 2];
 		}
 
 
