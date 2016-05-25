@@ -10,5 +10,17 @@ public class Values {
 	public static Double max = null;
 	public static Double IQR = null;
 	public static Double[] sortedArray = null;
+	
+	public static void clear() {
+		// TODO Auto-generated method stub
+		mean = null;
+		median = null;
+		stdDev = null;
+		skewness = null;
+		min = null;
+		max = null;
+		IQR = null;
+		sortedArray = null;
+	}
 
 }

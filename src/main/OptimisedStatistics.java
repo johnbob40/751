@@ -18,7 +18,7 @@ public class OptimisedStatistics {
 			boolean intQuartRange, boolean skewness){
 		
 		HashMap<String, Double> answers = new HashMap<String, Double>();
-
+		Values.clear();
 		if (inputData == null || inputData.size() == 0){
 			//little bit of robustness
 			return answers;
