@@ -8,7 +8,6 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import parallel.ParallelStatistics;
-import sequential.SequentialStatistics;
 import util.Data;
 
 public class TestParallelCalculate {
